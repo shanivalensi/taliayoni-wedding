@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talia & Yoni — Layout Preview</title>
+<style>
+  @font-face {
+    font-family: 'Slight';
+    src: url('slight.otf') format('opentype');
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat-regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat-bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Hadasim CLM';
+    src: url('hadasim-clm-regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Hadasim CLM';
+    src: url('hadasim-clm-bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a2e;
+    color: #eee;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  h1 { font-size: 18px; color: #fff; margin-bottom: 6px; }
+  .meta { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+
+  .page-wrap {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .page-column { flex: 1; min-width: 280px; max-width: 340px; }
+  .page-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .page-card {
+    background: #f7efe6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    padding: 40px 28px 32px;
+    color: #8f5b3e;
+    text-align: center;
+  }
+
+  .quote {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 12px;
+    direction: rtl;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .families {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 8.5px;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .family-col { flex: 1; }
+  .announcement {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .couple-name {
+    font-family: 'Slight', cursive;
+    font-size: 36px;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+  .hebrew-names {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 11px;
+    direction: rtl;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+  .invite-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .invite-bold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .date-block {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    line-height: 2;
+    margin-bottom: 14px;
+  }
+  .venue {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-bottom: 3px;
+  }
+  .venue-he {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 11px;
+    direction: rtl;
+    margin-bottom: 12px;
+  }
+  .waze-btn {
+    display: inline-block;
+    border: 1px solid #8f5b3e;
+    padding: 5px 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    border-radius: 1px;
+    text-decoration: none;
+    color: #8f5b3e;
+  }
+  .reception {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .memorial {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 8.5px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .form-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .form-field { margin-bottom: 16px; text-align: left; }
+  .field-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .field-input {
+    width: 100%;
+    height: 28px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    border-radius: 1px;
+  }
+  .field-textarea {
+    width: 100%;
+    height: 52px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    border-radius: 1px;
+  }
+  .radio-group {
+    display: flex;
+    gap: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    align-items: center;
+    color: #8f5b3e;
+  }
+  .radio-group label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+  .radio-circle {
+    width: 12px; height: 12px;
+    border: 1px solid #8f5b3e;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .submit-btn {
+    width: 100%;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    color: #8f5b3e;
+    padding: 9px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 6px;
+    border-radius: 1px;
+    cursor: pointer;
+  }
+
+  .annotations { flex: 0 0 250px; font-family: sans-serif; }
+  .ann-section {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .ann-section h3 { font-size: 11px; color: #58a6ff; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .ann-item { font-size: 12px; color: #c9d1d9; margin-bottom: 7px; line-height: 1.5; padding-left: 14px; position: relative; }
+  .ann-item::before { content: '→'; position: absolute; left: 0; color: #8b949e; font-size: 10px; }
+  .ann-code { font-family: monospace; font-size: 11px; color: #79c0ff; background: #161b22; padding: 2px 5px; border-radius: 3px; }
+  .ann-item b { color: #e6edf3; }
+  .ann-item .clr { color: #f0883e; }
+</style>
+</head>
+<body>
+
+<h1>Talia & Yoni — Layout Preview v4</h1>
+<p class="meta">Hebrew → Hadasim CLM <b style="color:#f0883e">Regular</b> throughout (not bold)</p>
+
+<div class="page-wrap">
+
+  <!-- DETAILS SECTION -->
+  <div class="page-column">
+    <div class="page-label">Section 1 — Details</div>
+    <div class="page-card">
+      <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
+
+      <div class="families">
+        <div class="family-col">
+          GERARD & BRIGITTE BENICHOU<br>
+          SYLVAIN & JOCELYNE VALENSI<br>
+          SANDRA VALENSI<br>
+          FRANCK VALENSI
+        </div>
+        <div class="family-col">
+          HUBERT & MICHELLE KRIEF<br>
+          DOV & CYNTHIA BERREBI
+        </div>
+      </div>
+
+      <div class="announcement">
+        ONT LA JOIE DE VOUS FAIRE PART<br>
+        DU MARIAGE DE LEURS PETITS-ENFANTS ET ENFANTS
+      </div>
+
+      <div class="couple-name">Talia &amp; Yoni</div>
+      <div class="hebrew-names"><span>מרים</span><span>אברהם יוסף</span></div>
+
+      <div class="invite-text">
+        ET VOUS PRIENT DE BIEN VOULOIR ASSISTER<br>
+        À LA HOUPPA QUI SERA CÉLÉBRÉE
+      </div>
+      <div class="invite-bold">AVANT LE COUCHER DU SOLEIL</div>
+
+      <div class="date-block">
+        LE MARDI 25 AOÛT 2026<br>
+        12 ELOUL 5786<br>
+        À 17 HEURES 15 PRÉCISES
+      </div>
+
+      <div class="venue">TZON KEDAR</div>
+      <div class="venue-he">חוות צאן קידר</div>
+      <a class="waze-btn" href="#">WAZE</a>
+
+      <div class="reception">LA CÉRÉMONIE SERA SUIVIE D'UNE RÉCEPTION</div>
+
+      <div class="memorial">
+        EN SOUVENIR DE NOS GRANDS-PARENTS,<br>
+        MEVORAH & MISHKA BERREBI,<br>
+        PRÉSENTS DANS CHACUN DE NOS PAS
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM SECTION -->
+  <div class="page-column">
+    <div class="page-label">Section 2 — RSVP Form</div>
+    <div class="page-card">
+      <div class="form-title">Merci de confirmer votre présence</div>
+
+      <div class="form-field">
+        <span class="field-label">NOM & PRÉNOM</span>
+        <div class="field-input"></div>
+      </div>
+
+      <div class="form-field">
+        <span class="field-label">SEREZ-VOUS PRÉSENT(E) À LA HOUPPA</span>
+        <div class="radio-group">
+          <label><span class="radio-circle"></span> OUI</label>
+          <label><span class="radio-circle"></span> NON</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <span class="field-label">NOMBRE DE PERSONNES</span>
+        <div class="field-input"></div>
+      </div>
+
+      <div class="form-field">
+        <span class="field-label">ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA ?</span>
+        <div class="radio-group">
+          <label><span class="radio-circle"></span> OUI</label>
+          <label><span class="radio-circle"></span> NON</label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <span class="field-label">LAISSEZ UN MESSAGE AUX MARIÉS !</span>
+        <div class="field-textarea"></div>
+      </div>
+
+      <button class="submit-btn">CONFIRMEZ VOTRE RÉPONSE</button>
+    </div>
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="ann-section">
+      <h3>Fonts</h3>
+      <div class="ann-item"><b>Slight</b> (OTF) — "Talia & Yoni"</div>
+      <div class="ann-item"><b>Montserrat Regular</b> — French body</div>
+      <div class="ann-item"><b>Montserrat Bold</b> — "AVANT LE COUCHER" + date</div>
+      <div class="ann-item"><b>Hadasim CLM Regular</b> — all Hebrew text</div>
+    </div>
+    <div class="ann-section">
+      <h3>Language Switch</h3>
+      <div class="ann-item"><span class="ann-code">?lang=fr</span> → French (default)</div>
+      <div class="ann-item"><span class="ann-code">?lang=he</span> → Hebrew + RTL</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

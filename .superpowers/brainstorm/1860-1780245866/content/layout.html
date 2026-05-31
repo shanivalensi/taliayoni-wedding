@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talia & Yoni — Layout Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #1a1a2e;
+    color: #eee;
+    padding: 20px;
+  }
+  h1 { font-size: 18px; color: #fff; margin-bottom: 6px; font-family: sans-serif; }
+  .meta { font-size: 13px; color: #aaa; margin-bottom: 20px; font-family: sans-serif; }
+  .page-wrap {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .page-column {
+    flex: 1;
+    min-width: 280px;
+  }
+  .page-label {
+    font-family: sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  /* The simulated phone/page */
+  .phone {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  /* Details section */
+  .section-details {
+    background: #f7f0e8;
+    position: relative;
+    padding: 0;
+  }
+  .section-details .bg-img {
+    width: 100%;
+    display: block;
+  }
+  .details-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 30px 40px;
+    text-align: center;
+    color: #8f5b3e;
+  }
+  .quote {
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    direction: rtl;
+  }
+  .families {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .family-col { text-align: center; flex: 1; }
+  .announcement {
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .couple-name {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 28px;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .hebrew-names {
+    font-size: 11px;
+    direction: rtl;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+  .invite-text {
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .invite-bold {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .date-block {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .venue {
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .venue-he {
+    font-size: 10px;
+    direction: rtl;
+    margin-bottom: 10px;
+  }
+  .waze-btn {
+    border: 1px solid #8f5b3e;
+    padding: 5px 18px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    border-radius: 2px;
+  }
+  .reception {
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .memorial {
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    line-height: 1.7;
+    font-style: italic;
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  /* Form section */
+  .section-form {
+    background: #f7f0e8;
+    position: relative;
+  }
+  .section-form .bg-img {
+    width: 100%;
+    display: block;
+  }
+  .form-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 30px 40px;
+    color: #8f5b3e;
+  }
+  .form-title {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .field-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  .field-input {
+    width: 100%;
+    height: 28px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    border-radius: 2px;
+  }
+  .field-textarea {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    border-radius: 2px;
+  }
+  .radio-group { display: flex; gap: 14px; font-size: 9px; letter-spacing: 1px; align-items: center; }
+  .radio-group label { display: flex; align-items: center; gap: 4px; }
+  .submit-btn {
+    width: 100%;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    color: #8f5b3e;
+    padding: 8px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  /* Annotation panel */
+  .annotations {
+    flex: 0 0 260px;
+    font-family: sans-serif;
+  }
+  .ann-section {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .ann-section h3 {
+    font-size: 12px;
+    color: #58a6ff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ann-item {
+    font-size: 12px;
+    color: #c9d1d9;
+    margin-bottom: 7px;
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+  .ann-item::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #8b949e;
+    font-size: 10px;
+  }
+  .ann-code {
+    font-family: monospace;
+    font-size: 11px;
+    color: #79c0ff;
+    background: #161b22;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  .ann-highlight {
+    color: #f0883e;
+  }
+  .ann-item b { color: #e6edf3; }
+</style>
+</head>
+<body>
+
+<h1>Talia & Yoni — Wedding Page Layout</h1>
+<p class="meta">Approach A · Single HTML file · Language via <span style="font-family:monospace;color:#79c0ff">?lang=fr</span> (default) or <span style="font-family:monospace;color:#79c0ff">?lang=he</span></p>
+
+<div class="page-wrap">
+
+  <!-- SECTION 1: DETAILS -->
+  <div class="page-column">
+    <div class="page-label">Section 1 — Details (background1.png)</div>
+    <div class="phone">
+      <div class="section-details" style="min-height:580px;">
+        <div class="details-content">
+          <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
+          <div class="families">
+            <div class="family-col">GERARD & BRIGITTE BENICHOU<br>SYLVAIN & JOCELYNE VALENSI<br>SANDRA VALENSI<br>FRANCK VALENSI</div>
+            <div class="family-col">HUBERT & MICHELLE KRIEF<br>DOV & CYNTHIA BERREBI</div>
+          </div>
+          <div class="announcement">ONT LA JOIE DE VOUS FAIRE PART<br>DU MARIAGE DE LEURS PETITS-ENFANTS ET ENFANTS</div>
+          <div class="couple-name">Talia &amp; Yoni</div>
+          <div class="hebrew-names"><span>מרים</span><span>אברהם יוסף</span></div>
+          <div class="invite-text">ET VOUS PRIENT DE BIEN VOULOIR ASSISTER<br>À LA HOUPPA QUI SERA CÉLÉBRÉE</div>
+          <div class="invite-bold">AVANT LE COUCHER DU SOLEIL</div>
+          <div class="date-block">LE MARDI 25 AOÛT 2026<br>12 ELOUL 5786<br>À 17 HEURES 15 PRÉCISES</div>
+          <div class="venue">TZON KEDAR</div>
+          <div class="venue-he">חוות צאן קידר</div>
+          <div class="waze-btn">WAZE</div>
+          <div class="reception">LA CÉRÉMONIE SERA SUIVIE D'UNE RÉCEPTION</div>
+          <div class="memorial">EN SOUVENIR DE NOS GRANDS-PARENTS,<br>MEVORAH & MISHKA BERREBI,<br>PRÉSENTS DANS CHACUN DE NOS PAS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: FORM -->
+  <div class="page-column">
+    <div class="page-label">Section 2 — RSVP Form (background2.png)</div>
+    <div class="phone">
+      <div class="section-form" style="min-height:580px;">
+        <div class="form-content">
+          <div class="form-title">Merci de confirmer votre présence</div>
+          <div class="form-field">
+            <span class="field-label">NOM & PRÉNOM</span>
+            <div class="field-input"></div>
+          </div>
+          <div class="form-field">
+            <span class="field-label">SEREZ-VOUS PRÉSENT(E) À LA HOUPPA</span>
+            <div class="radio-group">
+              <label><span style="width:12px;height:12px;border:1px solid #8f5b3e;border-radius:50%;display:inline-block"></span> OUI</label>
+              <label><span style="width:12px;height:12px;border:1px solid #8f5b3e;border-radius:50%;display:inline-block"></span> NON</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <span class="field-label">NOMBRE DE PERSONNES</span>
+            <div class="field-input"></div>
+          </div>
+          <div class="form-field">
+            <span class="field-label">ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA?</span>
+            <div class="radio-group">
+              <label><span style="width:12px;height:12px;border:1px solid #8f5b3e;border-radius:50%;display:inline-block"></span> OUI</label>
+              <label><span style="width:12px;height:12px;border:1px solid #8f5b3e;border-radius:50%;display:inline-block"></span> NON</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <span class="field-label">LAISSEZ UN MESSAGE AUX MARIÉS !</span>
+            <div class="field-textarea"></div>
+          </div>
+          <button class="submit-btn">CONFIRMEZ VOTRE RÉPONSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="ann-section">
+      <h3>Structure</h3>
+      <div class="ann-item">One <b>index.html</b> — scrolls top to bottom</div>
+      <div class="ann-item">Section 1 + Section 2 stack vertically on the page</div>
+      <div class="ann-item">Each section uses its background image at full width</div>
+      <div class="ann-item"><b>No nav bar</b> — pure immersive design</div>
+    </div>
+    <div class="ann-section">
+      <h3>Language Switching</h3>
+      <div class="ann-item"><span class="ann-code">?lang=fr</span> → French (default)</div>
+      <div class="ann-item"><span class="ann-code">?lang=he</span> → Hebrew + RTL layout</div>
+      <div class="ann-item">JS on load reads param, shows correct content block</div>
+      <div class="ann-item">Hebrew version mirrors layout right-to-left</div>
+    </div>
+    <div class="ann-section">
+      <h3>Fonts (local files)</h3>
+      <div class="ann-item"><b>Slight</b> — "Talia & Yoni" script</div>
+      <div class="ann-item"><b>Montserrat Regular</b> — French body text</div>
+      <div class="ann-item"><b>Montserrat Bold</b> — 2 specific headings</div>
+      <div class="ann-item"><b>Hadasim CLM Regular</b> — Hebrew body</div>
+      <div class="ann-item"><b>Hadasim CLM Bold</b> — Hebrew in French page</div>
+      <div class="ann-item">All loaded via <span class="ann-code">@font-face</span> from <span class="ann-code">/fonts/</span></div>
+    </div>
+    <div class="ann-section">
+      <h3>Colors & Style</h3>
+      <div class="ann-item">All text: <span class="ann-highlight">#8f5b3e</span></div>
+      <div class="ann-item">Backgrounds: <span class="ann-highlight">#f7efe6</span> (cream)</div>
+      <div class="ann-item">WAZE button → outlined rectangle, links to venue</div>
+      <div class="ann-item">Form fields → outlined, transparent background</div>
+    </div>
+    <div class="ann-section">
+      <h3>Deliverable</h3>
+      <div class="ann-item">Single <b>index.html</b> file</div>
+      <div class="ann-item">Works opened directly from disk</div>
+      <div class="ann-item">Ready to upload to any static host</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

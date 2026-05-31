@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talia &amp; Yoni</title>
+    <style>
+      @font-face {
+        font-family: "Slight";
+        src: url("fonts/slight.otf") format("opentype");
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("fonts/montserrat-regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("fonts/montserrat-bold..ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Hadasim CLM";
+        src: url("fonts/hadasim-clm-regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Hadasim CLM";
+        src: url("fonts/hadasim-clm-bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #f0e8dc;
+        color: #8f5b3e;
+      }
+
+      /* ── Centered container ─────────────────────────────── */
+      .page {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      /* ── Each section = background image + overlay ──────── */
+      .section {
+        position: relative;
+      }
+      .section .bg {
+        display: block;
+        width: 100%;
+      }
+
+      .section .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: #8f5b3e;
+      }
+
+      /* ── Details overlay ─────────────────────────────────── */
+      /* Image aspect ratio ≈ 2.25 (height:width).
+       Content should start at ~22% from image top → 22% × 2.25 = 49.5% of width.
+       Mountains occupy last ~15% → 15% × 2.25 = 34% of width as padding-bottom. */
+      .details .overlay {
+        padding: 37% 16% 34%;
+        justify-content: space-evenly;
+      }
+
+      /* ── Form overlay ────────────────────────────────────── */
+      /* Content area starts at ~12% from image top → 12% × 2.25 = 27%.
+       Mountains occupy last ~20% → 20% × 2.25 = 45%. */
+      .form-section .overlay {
+        padding: 25% 14% 45%;
+        justify-content: space-evenly;
+        align-items: stretch;
+        text-align: left;
+      }
+
+      /* ════════════════════════════════════════════════════════
+       DETAILS — typography
+    ════════════════════════════════════════════════════════ */
+
+      .quote {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        font-size: 18px;
+        direction: rtl;
+        letter-spacing: 0.3px;
+        line-height: 1.6;
+      }
+
+      .families {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 10px;
+        letter-spacing: 0.6px;
+        line-height: 1.5;
+        text-align: left;
+        margin-top: 20px;
+      }
+
+      .announcement {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 13px;
+        letter-spacing: 1px;
+        line-height: 1.8;
+        margin-top: 14px;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .couple-name {
+        font-family: "Slight", cursive;
+        font-size: 38px;
+        line-height: 1;
+        animation: fadeInUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: 0.4s;
+      }
+
+      .hebrew-names {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        font-size: 17px;
+        direction: ltr;
+        display: flex;
+        justify-content: space-between;
+        width: 68%;
+        margin-top: -12px;
+        animation: fadeInUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: 0.9s;
+      }
+
+      .invite-group {
+        margin-top: 16px;
+      }
+
+      .invite-text {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 1px;
+        line-height: 1.8;
+      }
+
+      .invite-bold {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+      }
+
+      .date-block {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1.5px;
+        line-height: 2.1;
+      }
+
+      .venue-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .venue {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 2.5px;
+      }
+
+      .venue-he {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        font-size: 15px;
+        direction: rtl;
+      }
+
+      .waze-btn {
+        display: inline-block;
+        border: 1px solid #8f5b3e;
+        padding: 5px 22px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 13px;
+        letter-spacing: 2.5px;
+        text-decoration: none;
+        color: #8f5b3e;
+        margin-top: 4px;
+      }
+      .waze-btn:hover {
+        background: rgba(143, 91, 62, 0.06);
+      }
+
+      .reception {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 1px;
+        margin-top: 14px;
+      }
+
+      .memorial {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        line-height: 1.9;
+        font-style: italic;
+      }
+
+      /* ════════════════════════════════════════════════════════
+       FORM — typography & inputs
+    ════════════════════════════════════════════════════════ */
+
+      .form-title {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        letter-spacing: 1px;
+        text-align: center;
+        align-self: center;
+        margin-top: -20px;
+      }
+
+      .form-field {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .field-label {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+      }
+
+      .field-input,
+      .field-textarea {
+        background: transparent;
+        border: 1px solid #8f5b3e;
+        border-radius: 0;
+        outline: none;
+        color: #8f5b3e;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+        padding: 4px 6px;
+      }
+      .field-input {
+        height: 32px;
+      }
+      .field-textarea {
+        height: 62px;
+        resize: none;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+      .radio-group input[type="radio"] {
+        accent-color: #8f5b3e;
+        width: 14px;
+        height: 14px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        border: 1px solid #8f5b3e;
+        background: transparent;
+        color: #8f5b3e;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        letter-spacing: 2.5px;
+        padding: 9px;
+        cursor: pointer;
+      }
+      .submit-btn:hover {
+        background: rgba(143, 91, 62, 0.06);
+      }
+
+      /* ════════════════════════════════════════════════════════
+       HEBREW overrides
+    ════════════════════════════════════════════════════════ */
+
+      [dir="rtl"] .details .overlay {
+        direction: rtl;
+      }
+      [dir="rtl"] .families {
+        direction: rtl;
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        text-align: right;
+      }
+      [dir="rtl"] .announcement {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+      [dir="rtl"] .invite-text {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+      [dir="rtl"] .invite-bold {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+      [dir="rtl"] .date-block {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+      [dir="rtl"] .reception {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+      [dir="rtl"] .memorial {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0;
+      }
+
+      [dir="rtl"] .form-section .overlay {
+        direction: rtl;
+        text-align: right;
+        align-items: stretch;
+      }
+      [dir="rtl"] .form-title {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+      }
+      [dir="rtl"] .field-label {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        letter-spacing: 0;
+        font-size: 16px;
+      }
+      [dir="rtl"] .field-input,
+      [dir="rtl"] .field-textarea {
+        direction: rtl;
+      }
+      [dir="rtl"] .radio-group {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+      [dir="rtl"] .radio-group label {
+        font-family: "Hadasim CLM", serif;
+        letter-spacing: 0;
+        font-size: 17px;
+      }
+      [dir="rtl"] .submit-btn {
+        font-family: "Hadasim CLM", serif;
+        font-weight: 400;
+        letter-spacing: 0;
+        font-size: 17px;
+      }
+
+      /* ── Small screen scaling ─────────────────────────────── */
+      @media (max-width: 400px) {
+        .couple-name {
+          font-size: 13vw;
+        }
+        .quote,
+        .venue-he,
+        .hebrew-names {
+          font-size: 12px;
+        }
+        .families,
+        .announcement,
+        .invite-text,
+        .invite-bold,
+        .date-block,
+        .venue,
+        .reception,
+        .memorial {
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════
+     FRENCH (default)
+══════════════════════════════════════════ -->
+    <div id="lang-fr">
+      <div class="page">
+        <!-- Details -->
+        <div class="section details">
+          <img src="resources/background1.png" class="bg" alt="" />
+          <div class="overlay">
+            <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
+
+            <div class="families">
+              <div>
+                GERARD &amp; BRIGITTE BENICHOU<br />SYLVAIN &amp; JOCELYNE
+                VALENSI<br /><br />SANDRA VALENSI<br />FRANCK VALENSI
+              </div>
+              <div>
+                HUBERT &amp; MICHELLE KRIEF<br /><br /><br />DOV &amp; CYNTHIA
+                BERREBI
+              </div>
+            </div>
+
+            <div class="announcement">
+              ONT LA JOIE DE VOUS FAIRE PART DU MARIAGE<br />DE LEURS
+              PETITS-ENFANTS ET ENFANTS
+            </div>
+
+            <div class="couple-name">Talia &amp; Yoni</div>
+            <div class="hebrew-names">
+              <span>מרים</span><span>אברהם יוסף</span>
+            </div>
+
+            <div class="invite-group">
+              <div class="invite-text">
+                ET VOUS PRIENT DE BIEN VOULOIR ASSISTER<br />À LA HOUPPA QUI
+                SERA CÉLÉBRÉE
+              </div>
+              <div class="invite-bold">AVANT LE COUCHER DU SOLEIL</div>
+            </div>
+
+            <div class="date-block">
+              LE MARDI 25 AOÛT 2026<br />
+              12 ELOUL 5786<br />
+              À 17 HEURES 15 PRÉCISES
+            </div>
+
+            <div class="venue-group">
+              <div class="venue">TZON KEDAR</div>
+              <div class="venue-he">חוות צאן קידר</div>
+              <a
+                class="waze-btn"
+                href="https://www.waze.com/he/live-map/directions/%D7%97%D7%95%D7%95%D7%AA-%D7%A6%D7%90%D7%9F-%D7%A7%D7%93%D7%A8?to=place.w.23134525.231476326.495962"
+                target="_blank"
+                rel="noopener"
+                >WAZE</a
+              >
+            </div>
+
+            <div class="reception">
+              LA CÉRÉMONIE SERA SUIVIE D'UNE RÉCEPTION
+            </div>
+
+            <div class="memorial">
+              EN SOUVENIR DE NOS GRANDS-PARENTS, MEVORAH &amp; MISHKA
+              BERREBI,<br />PRÉSENTS DANS CHACUN DE NOS PAS
+            </div>
+          </div>
+        </div>
+
+        <!-- RSVP Form -->
+        <div class="section form-section">
+          <img src="resources/background2.png" class="bg" alt="" />
+          <div class="overlay">
+            <div class="form-title">Merci de confirmer votre présence</div>
+
+            <div class="form-field">
+              <span class="field-label">NOM &amp; PRÉNOM</span>
+              <input class="field-input" type="text" autocomplete="name" />
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">SEREZ-VOUS PRÉSENT(E) À LA HOUPPA</span>
+              <div class="radio-group">
+                <label
+                  ><input type="radio" name="present-fr" value="oui" />
+                  OUI</label
+                >
+                <label
+                  ><input type="radio" name="present-fr" value="non" />
+                  NON</label
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">NOMBRE DE PERSONNES</span>
+              <input class="field-input" type="number" min="1" />
+            </div>
+
+            <div class="form-field">
+              <span class="field-label"
+                >ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA ?</span
+              >
+              <div class="radio-group">
+                <label
+                  ><input type="radio" name="bus-fr" value="oui" /> OUI</label
+                >
+                <label
+                  ><input type="radio" name="bus-fr" value="non" /> NON</label
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">LAISSEZ UN MESSAGE AUX MARIÉS !</span>
+              <textarea class="field-textarea"></textarea>
+            </div>
+
+            <button class="submit-btn">CONFIRMEZ VOTRE RÉPONSE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+     HEBREW
+══════════════════════════════════════════ -->
+    <div id="lang-he" style="display: none" dir="rtl">
+      <div class="page">
+        <!-- Details - Hebrew -->
+        <div class="section details">
+          <img src="resources/background1.png" class="bg" alt="" />
+          <div class="overlay">
+            <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
+
+            <div class="families">
+              <div>
+                ג'ררד &amp; בריז'יט בנישו<br />סילבן &amp; ז'וסלין ולנסי<br /><br />סנדרה
+                ולנסי<br />פרנק ולנסי
+              </div>
+              <div>אברהם &amp; מישל קריאף<br /><br />דב &amp; שרה ברבי</div>
+            </div>
+
+            <div class="announcement">
+              שמחים להזמינכם לנישואי נכדיהם וילדיהם
+            </div>
+
+            <div class="couple-name">Talia &amp; Yoni</div>
+            <div class="hebrew-names">
+              <span>מרים</span><span>אברהם יוסף</span>
+            </div>
+
+            <div class="invite-group">
+              <div class="invite-text">
+                ומתכבדים להזמינכם לטקס החופה וקידושין
+              </div>
+              <div class="invite-bold">שיתקיימו לפני השקיעה</div>
+            </div>
+
+            <div class="date-block">
+              יום שלישי 25 באוגוסט 2026<br />
+              י״ב אלול תשפ״ו<br />
+              בשעה 17:15
+            </div>
+
+            <div>
+              <div class="venue">TZON KEDAR</div>
+              <div class="venue-he">חוות צאן קידר</div>
+              <a
+                class="waze-btn"
+                href="https://www.waze.com/he/live-map/directions/%D7%97%D7%95%D7%95%D7%AA-%D7%A6%D7%90%D7%9F-%D7%A7%D7%93%D7%A8?to=place.w.23134525.231476326.495962"
+                target="_blank"
+                rel="noopener"
+                >WAZE</a
+              >
+            </div>
+
+            <div class="reception">לאחר הטקס תתקיים קבלת פנים</div>
+
+            <div class="memorial">
+              לזכר סבינו וסבתותינו, מבורך ומישקה ברבי,<br />הנוכחים בכל צעד
+              בחיינו
+            </div>
+          </div>
+        </div>
+
+        <!-- RSVP Form - Hebrew -->
+        <div class="section form-section">
+          <img src="resources/background2.png" class="bg" alt="" />
+          <div class="overlay">
+            <div class="form-title">נא אשרו הגעה</div>
+
+            <div class="form-field">
+              <span class="field-label">שם &amp; שם משפחה</span>
+              <input class="field-input" type="text" autocomplete="name" />
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">האם תהיו נוכחים בחופה?</span>
+              <div class="radio-group">
+                <label
+                  ><input type="radio" name="present-he" value="yes" />
+                  כן</label
+                >
+                <label
+                  ><input type="radio" name="present-he" value="no" /> לא</label
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">מספר האורחים</span>
+              <input class="field-input" type="number" min="1" />
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">האם אתם מעוניינים בהסעה מרעננה?</span>
+              <div class="radio-group">
+                <label
+                  ><input type="radio" name="bus-he" value="yes" /> כן</label
+                >
+                <label
+                  ><input type="radio" name="bus-he" value="no" /> לא</label
+                >
+              </div>
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">השאירו ברכה לזוג!</span>
+              <textarea class="field-textarea"></textarea>
+            </div>
+
+            <button class="submit-btn">אשרו את תשובתכם</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const lang =
+        new URLSearchParams(window.location.search).get("lang") || "fr";
+      if (lang === "he") {
+        document.getElementById("lang-fr").style.display = "none";
+        document.getElementById("lang-he").style.display = "block";
+        document.documentElement.lang = "he";
+      }
+
+
+    </script>
+  </body>
+</html>

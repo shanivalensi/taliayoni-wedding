@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talia & Yoni — Layout Preview</title>
+<style>
+  @font-face {
+    font-family: 'Slight';
+    src: url('slight.otf') format('opentype');
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat-regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('montserrat-bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Hadasim CLM';
+    src: url('hadasim-clm-regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Hadasim CLM';
+    src: url('hadasim-clm-bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a2e;
+    font-family: sans-serif;
+    color: #eee;
+    padding: 16px;
+  }
+
+  h1 { font-size: 15px; color: #fff; margin-bottom: 4px; }
+  .meta { font-size: 12px; color: #888; margin-bottom: 16px; }
+
+  .preview-wrap {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  /* The two page sections side by side, each full width within their column */
+  .pages {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .section-wrap {
+    flex: 1;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  /* The actual page mockup — full width of its column */
+  .page {
+    background: #f7efe6;
+    border-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    padding: 48px 60px 40px;
+    color: #8f5b3e;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* ---- Details ---- */
+  .quote {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 13px;
+    direction: rtl;
+    margin-bottom: 22px;
+  }
+
+  .families {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    line-height: 1.9;
+    margin-bottom: 18px;
+    white-space: nowrap;
+  }
+
+  .announcement {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+
+  .couple-name {
+    font-family: 'Slight', cursive;
+    font-size: 52px;
+    margin-bottom: 6px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .hebrew-names {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 13px;
+    direction: rtl;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .invite-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    line-height: 1.8;
+    margin-bottom: 4px;
+  }
+
+  .invite-bold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+
+  .date-block {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    line-height: 2.1;
+    margin-bottom: 16px;
+  }
+
+  .venue {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+
+  .venue-he {
+    font-family: 'Hadasim CLM', serif;
+    font-weight: 400;
+    font-size: 13px;
+    direction: rtl;
+    margin-bottom: 14px;
+  }
+
+  .waze-btn {
+    display: inline-block;
+    border: 1px solid #8f5b3e;
+    padding: 6px 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: #8f5b3e;
+  }
+
+  .reception {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 18px;
+  }
+
+  .memorial {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 0.8px;
+    line-height: 1.9;
+    font-style: italic;
+  }
+
+  /* ---- Form ---- */
+  .form-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+  }
+
+  .form-field { margin-bottom: 18px; text-align: left; }
+
+  .field-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+  }
+
+  .field-input {
+    width: 100%;
+    height: 32px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+  }
+
+  .field-textarea {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    align-items: center;
+    color: #8f5b3e;
+  }
+
+  .radio-group label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+  .radio-circle {
+    width: 13px; height: 13px;
+    border: 1px solid #8f5b3e;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .submit-btn {
+    width: 100%;
+    border: 1px solid #8f5b3e;
+    background: transparent;
+    color: #8f5b3e;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+
+  /* ---- Annotations ---- */
+  .annotations {
+    flex: 0 0 210px;
+  }
+
+  .ann-section {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+
+  .ann-section h3 {
+    font-size: 10px;
+    color: #58a6ff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .ann-item {
+    font-size: 11px;
+    color: #c9d1d9;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .ann-item::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #8b949e;
+    font-size: 9px;
+  }
+
+  .ann-code {
+    font-family: monospace;
+    font-size: 10px;
+    color: #79c0ff;
+    background: #161b22;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  .ann-item b { color: #e6edf3; }
+  .clr { color: #f0883e; }
+</style>
+</head>
+<body>
+
+<h1>Talia & Yoni — Full Width Preview</h1>
+<p class="meta">Sections shown at actual proportions · <span style="font-family:monospace;color:#79c0ff">?lang=fr</span> default · <span style="font-family:monospace;color:#79c0ff">?lang=he</span> for Hebrew+RTL</p>
+
+<div class="preview-wrap">
+  <div class="pages">
+
+    <!-- SECTION 1: DETAILS -->
+    <div class="section-wrap">
+      <div class="section-label">Section 1 — Details (background1.png)</div>
+      <div class="page">
+        <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
+
+        <div class="families">
+          <div>
+            GERARD & BRIGITTE BENICHOU<br>
+            SYLVAIN & JOCELYNE VALENSI<br>
+            SANDRA VALENSI<br>
+            FRANCK VALENSI
+          </div>
+          <div>
+            HUBERT & MICHELLE KRIEF<br>
+            DOV & CYNTHIA BERREBI
+          </div>
+        </div>
+
+        <div class="announcement">
+          ONT LA JOIE DE VOUS FAIRE PART DU MARIAGE DE LEURS PETITS-ENFANTS ET ENFANTS
+        </div>
+
+        <div class="couple-name">Talia &amp; Yoni</div>
+        <div class="hebrew-names"><span>מרים</span><span>אברהם יוסף</span></div>
+
+        <div class="invite-text">
+          ET VOUS PRIENT DE BIEN VOULOIR ASSISTER À LA HOUPPA QUI SERA CÉLÉBRÉE
+        </div>
+        <div class="invite-bold">AVANT LE COUCHER DU SOLEIL</div>
+
+        <div class="date-block">
+          LE MARDI 25 AOÛT 2026<br>
+          12 ELOUL 5786<br>
+          À 17 HEURES 15 PRÉCISES
+        </div>
+
+        <div class="venue">TZON KEDAR</div>
+        <div class="venue-he">חוות צאן קידר</div>
+        <a class="waze-btn" href="#">WAZE</a>
+
+        <div class="reception">LA CÉRÉMONIE SERA SUIVIE D'UNE RÉCEPTION</div>
+
+        <div class="memorial">
+          EN SOUVENIR DE NOS GRANDS-PARENTS, MEVORAH & MISHKA BERREBI,<br>
+          PRÉSENTS DANS CHACUN DE NOS PAS
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: FORM -->
+    <div class="section-wrap">
+      <div class="section-label">Section 2 — RSVP Form (background2.png)</div>
+      <div class="page">
+        <div class="form-title">Merci de confirmer votre présence</div>
+
+        <div class="form-field">
+          <span class="field-label">NOM & PRÉNOM</span>
+          <div class="field-input"></div>
+        </div>
+
+        <div class="form-field">
+          <span class="field-label">SEREZ-VOUS PRÉSENT(E) À LA HOUPPA</span>
+          <div class="radio-group">
+            <label><span class="radio-circle"></span> OUI</label>
+            <label><span class="radio-circle"></span> NON</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <span class="field-label">NOMBRE DE PERSONNES</span>
+          <div class="field-input"></div>
+        </div>
+
+        <div class="form-field">
+          <span class="field-label">ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA ?</span>
+          <div class="radio-group">
+            <label><span class="radio-circle"></span> OUI</label>
+            <label><span class="radio-circle"></span> NON</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <span class="field-label">LAISSEZ UN MESSAGE AUX MARIÉS !</span>
+          <div class="field-textarea"></div>
+        </div>
+
+        <button class="submit-btn">CONFIRMEZ VOTRE RÉPONSE</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="ann-section">
+      <h3>Fonts</h3>
+      <div class="ann-item"><b>Slight</b> — "Talia & Yoni"</div>
+      <div class="ann-item"><b>Montserrat Regular</b> — French body</div>
+      <div class="ann-item"><b>Montserrat Bold</b> — "AVANT LE COUCHER" + date</div>
+      <div class="ann-item"><b>Hadasim CLM Regular</b> — all Hebrew</div>
+    </div>
+    <div class="ann-section">
+      <h3>Language</h3>
+      <div class="ann-item"><span class="ann-code">?lang=fr</span> default</div>
+      <div class="ann-item"><span class="ann-code">?lang=he</span> Hebrew+RTL</div>
+    </div>
+    <div class="ann-section">
+      <h3>Colors</h3>
+      <div class="ann-item">Text: <span class="clr">#8f5b3e</span></div>
+      <div class="ann-item">BG: <span class="clr">background1/2.png</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
