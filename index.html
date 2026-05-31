@@ -62,8 +62,6 @@
       .section .bg {
         display: block;
         width: 100%;
-        transform: scale(1.08);
-        will-change: transform;
       }
 
       .section .overlay {
@@ -74,20 +72,29 @@
         align-items: center;
         text-align: center;
         color: #8f5b3e;
+        z-index: 2;
+        will-change: transform;
+      }
+
+
+
+      .details {
+        z-index: 2;
+        margin-bottom: clamp(-120px, -21vw, -60px);
+        -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 99%);
+        mask-image: linear-gradient(to bottom, black 90%, transparent 99%);
+      }
+      .form-section {
+        z-index: 1;
       }
 
       /* ── Details overlay ─────────────────────────────────── */
-      /* Image aspect ratio ≈ 2.25 (height:width).
-       Content should start at ~22% from image top → 22% × 2.25 = 49.5% of width.
-       Mountains occupy last ~15% → 15% × 2.25 = 34% of width as padding-bottom. */
       .details .overlay {
         padding: 37% 16% 34%;
         justify-content: space-evenly;
       }
 
       /* ── Form overlay ────────────────────────────────────── */
-      /* Content area starts at ~12% from image top → 12% × 2.25 = 27%.
-       Mountains occupy last ~20% → 20% × 2.25 = 45%. */
       .form-section .overlay {
         padding: 32% 14% 45%;
         justify-content: space-evenly;
@@ -641,11 +648,11 @@
 
       function applyParallax() {
         document.querySelectorAll(".section").forEach(section => {
-          const bg = section.querySelector(".bg");
+          const overlay = section.querySelector(".overlay");
           const rect = section.getBoundingClientRect();
           const progress = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
-          const offset = progress * 40;
-          bg.style.transform = `scale(1.08) translateY(${offset}px)`;
+          const offset = progress * 35;
+          overlay.style.transform = `translateY(${offset}px)`;
         });
       }
 
