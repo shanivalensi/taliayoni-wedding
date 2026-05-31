@@ -99,7 +99,7 @@
       .quote {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
-        font-size: 18px;
+        font-size: clamp(11px, 3.21vw, 18px);
         direction: rtl;
         letter-spacing: 0.3px;
         line-height: 1.6;
@@ -111,7 +111,7 @@
         width: 100%;
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 10px;
+        font-size: clamp(6px, 1.79vw, 10px);
         letter-spacing: 0.6px;
         line-height: 1.5;
         text-align: left;
@@ -121,8 +121,8 @@
       .announcement {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 13px;
-        letter-spacing: 1px;
+        font-size: clamp(8px, 2.32vw, 13px);
+        letter-spacing: clamp(0.5px, 0.18vw, 1px);
         line-height: 1.8;
         margin-top: 14px;
       }
@@ -140,7 +140,7 @@
 
       .couple-name {
         font-family: "Slight", cursive;
-        font-size: 38px;
+        font-size: clamp(23px, 6.79vw, 38px);
         line-height: 1;
         animation: fadeInUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: 0.4s;
@@ -149,7 +149,7 @@
       .hebrew-names {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
-        font-size: 17px;
+        font-size: clamp(10px, 3.04vw, 17px);
         direction: ltr;
         display: flex;
         justify-content: space-between;
@@ -166,23 +166,23 @@
       .invite-text {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 14px;
-        letter-spacing: 1px;
+        font-size: clamp(8px, 2.5vw, 14px);
+        letter-spacing: clamp(0.5px, 0.18vw, 1px);
         line-height: 1.8;
       }
 
       .invite-bold {
         font-family: "Montserrat", sans-serif;
         font-weight: 700;
-        font-size: 15px;
-        letter-spacing: 1.5px;
+        font-size: clamp(9px, 2.68vw, 15px);
+        letter-spacing: clamp(0.8px, 0.27vw, 1.5px);
       }
 
       .date-block {
         font-family: "Montserrat", sans-serif;
         font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 1.5px;
+        font-size: clamp(8px, 2.5vw, 14px);
+        letter-spacing: clamp(0.8px, 0.27vw, 1.5px);
         line-height: 2.1;
       }
 
@@ -196,25 +196,25 @@
       .venue {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 14px;
-        letter-spacing: 2.5px;
+        font-size: clamp(8px, 2.5vw, 14px);
+        letter-spacing: clamp(1.5px, 0.45vw, 2.5px);
       }
 
       .venue-he {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
-        font-size: 15px;
+        font-size: clamp(9px, 2.68vw, 15px);
         direction: rtl;
       }
 
       .waze-btn {
         display: inline-block;
         border: 1px solid #8f5b3e;
-        padding: 5px 22px;
+        padding: 5px clamp(12px, 3.93vw, 22px);
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 13px;
-        letter-spacing: 2.5px;
+        font-size: clamp(8px, 2.32vw, 13px);
+        letter-spacing: clamp(1.5px, 0.45vw, 2.5px);
         text-decoration: none;
         color: #8f5b3e;
         margin-top: 4px;
@@ -226,15 +226,15 @@
       .reception {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 14px;
-        letter-spacing: 1px;
+        font-size: clamp(8px, 2.5vw, 14px);
+        letter-spacing: clamp(0.5px, 0.18vw, 1px);
         margin-top: 14px;
       }
 
       .memorial {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: clamp(8px, 2.5vw, 14px);
         letter-spacing: 0.5px;
         line-height: 1.9;
         font-style: italic;
@@ -247,8 +247,8 @@
       .form-title {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 20px;
-        letter-spacing: 1px;
+        font-size: clamp(12px, 3.57vw, 20px);
+        letter-spacing: clamp(0.5px, 0.18vw, 1px);
         text-align: center;
         align-self: center;
         margin-top: -20px;
@@ -264,8 +264,8 @@
       .field-label {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 15px;
-        letter-spacing: 1.5px;
+        font-size: clamp(9px, 2.68vw, 15px);
+        letter-spacing: clamp(0.8px, 0.27vw, 1.5px);
       }
 
       .field-input,
@@ -276,7 +276,7 @@
         outline: none;
         color: #8f5b3e;
         font-family: "Montserrat", sans-serif;
-        font-size: 15px;
+        font-size: clamp(9px, 2.68vw, 15px);
         padding: 4px 6px;
       }
       .field-input {
@@ -297,8 +297,8 @@
         align-items: center;
         gap: 6px;
         font-family: "Montserrat", sans-serif;
-        font-size: 15px;
-        letter-spacing: 1px;
+        font-size: clamp(9px, 2.68vw, 15px);
+        letter-spacing: clamp(0.5px, 0.18vw, 1px);
         cursor: pointer;
       }
       .radio-group input[type="radio"] {
@@ -314,8 +314,8 @@
         color: #8f5b3e;
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: 15px;
-        letter-spacing: 2.5px;
+        font-size: clamp(9px, 2.68vw, 15px);
+        letter-spacing: clamp(1.5px, 0.45vw, 2.5px);
         padding: 9px;
         cursor: pointer;
       }
@@ -381,7 +381,7 @@
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: 16px;
+        font-size: clamp(10px, 2.86vw, 16px);
       }
       [dir="rtl"] .field-input,
       [dir="rtl"] .field-textarea {
@@ -394,36 +394,15 @@
       [dir="rtl"] .radio-group label {
         font-family: "Hadasim CLM", serif;
         letter-spacing: 0;
-        font-size: 17px;
+        font-size: clamp(10px, 3.04vw, 17px);
       }
       [dir="rtl"] .submit-btn {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: 17px;
+        font-size: clamp(10px, 3.04vw, 17px);
       }
 
-      /* ── Small screen scaling ─────────────────────────────── */
-      @media (max-width: 400px) {
-        .couple-name {
-          font-size: 13vw;
-        }
-        .quote,
-        .venue-he,
-        .hebrew-names {
-          font-size: 12px;
-        }
-        .families,
-        .announcement,
-        .invite-text,
-        .invite-bold,
-        .date-block,
-        .venue,
-        .reception,
-        .memorial {
-          font-size: 9px;
-        }
-      }
     </style>
   </head>
   <body>
