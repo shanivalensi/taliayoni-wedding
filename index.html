@@ -115,7 +115,7 @@
         letter-spacing: 0.6px;
         line-height: 1.5;
         text-align: left;
-        margin-top: 20px;
+        margin-top: clamp(12px, 3.57vw, 20px);
       }
 
       .announcement {
@@ -124,26 +124,13 @@
         font-size: clamp(8px, 2.32vw, 13px);
         letter-spacing: clamp(0.5px, 0.18vw, 1px);
         line-height: 1.8;
-        margin-top: 14px;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(16px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        margin-top: clamp(8px, 2.5vw, 14px);
       }
 
       .couple-name {
         font-family: "Slight", cursive;
         font-size: clamp(23px, 6.79vw, 38px);
         line-height: 1;
-        animation: fadeInUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-        animation-delay: 0.4s;
       }
 
       .hebrew-names {
@@ -154,13 +141,11 @@
         display: flex;
         justify-content: space-between;
         width: 68%;
-        margin-top: -12px;
-        animation: fadeInUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-        animation-delay: 0.9s;
+        margin-top: clamp(-12px, -2.14vw, -8px);
       }
 
       .invite-group {
-        margin-top: 16px;
+        margin-top: clamp(10px, 2.86vw, 16px);
       }
 
       .invite-text {
@@ -228,13 +213,13 @@
         font-weight: 400;
         font-size: clamp(8px, 2.5vw, 14px);
         letter-spacing: clamp(0.5px, 0.18vw, 1px);
-        margin-top: 14px;
+        margin-top: clamp(8px, 2.5vw, 14px);
       }
 
       .memorial {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
-        font-size: clamp(8px, 2.5vw, 14px);
+        font-size: clamp(6px, 1.96vw, 11px);
         letter-spacing: 0.5px;
         line-height: 1.9;
         font-style: italic;
@@ -381,7 +366,6 @@
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(10px, 2.86vw, 16px);
       }
       [dir="rtl"] .field-input,
       [dir="rtl"] .field-textarea {
@@ -394,13 +378,11 @@
       [dir="rtl"] .radio-group label {
         font-family: "Hadasim CLM", serif;
         letter-spacing: 0;
-        font-size: clamp(10px, 3.04vw, 17px);
       }
       [dir="rtl"] .submit-btn {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(10px, 3.04vw, 17px);
       }
 
     </style>
