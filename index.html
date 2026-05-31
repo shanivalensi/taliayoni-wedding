@@ -57,10 +57,13 @@
       /* ── Each section = background image + overlay ──────── */
       .section {
         position: relative;
+        overflow: hidden;
       }
       .section .bg {
         display: block;
         width: 100%;
+        transform: scale(1.08);
+        will-change: transform;
       }
 
       .section .overlay {
@@ -635,6 +638,27 @@
         document.getElementById("lang-he").style.display = "block";
         document.documentElement.lang = "he";
       }
+
+      function applyParallax() {
+        document.querySelectorAll(".section").forEach(section => {
+          const bg = section.querySelector(".bg");
+          const rect = section.getBoundingClientRect();
+          const progress = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+          const offset = progress * 40;
+          bg.style.transform = `scale(1.08) translateY(${offset}px)`;
+        });
+      }
+
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { applyParallax(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+      window.addEventListener("resize", applyParallax, { passive: true });
+      window.addEventListener("load", applyParallax);
+      requestAnimationFrame(applyParallax);
 
 
     </script>
