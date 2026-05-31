@@ -24,6 +24,7 @@ is "slight"
 all the hebrew in the french page is Hadasim-clm-bold
 
 all the basic hebrew (that is not in the french)
+
 is hadasim-clm-regular
 
 ask questions when your not sure
