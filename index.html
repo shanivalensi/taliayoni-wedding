@@ -95,13 +95,13 @@
 
       /* ── Details overlay ─────────────────────────────────── */
       .details .overlay {
-        padding: 37% 16% 34%;
+        padding: 41% 16% 34%;
         justify-content: space-evenly;
       }
 
       /* ── Form overlay ────────────────────────────────────── */
       .form-section .overlay {
-        padding: 32% 14% 45%;
+        padding: 40% 14% 45%;
         justify-content: space-evenly;
         align-items: stretch;
         text-align: left;
@@ -156,7 +156,7 @@
         display: flex;
         justify-content: space-between;
         width: 68%;
-        margin-top: clamp(-12px, -2.14vw, -8px);
+        margin-top: clamp(-4px, -0.7vw, -2px);
       }
 
       .invite-group {
@@ -669,7 +669,7 @@
         const vh = window.innerHeight;
         parallaxItems.forEach(item => {
           const progress = (item.top - scrollY + item.height / 2 - vh / 2) / vh;
-          item.overlay.style.transform = `translateY(${progress * 35}px)`;
+          item.overlay.style.transform = `translateY(${progress * -42}px)`;
         });
         ticking = false;
       }
