@@ -718,7 +718,7 @@
       }));
 
       function applyParallax() {
-        const vh = window.innerHeight;
+        const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
         sections.forEach(({ el, overlay, bgs }) => {
           const rect = el.getBoundingClientRect();
           const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
@@ -741,6 +741,9 @@
 
       window.addEventListener("resize", applyParallax, { passive: true });
       window.addEventListener("load", applyParallax);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", applyParallax, { passive: true });
+      }
       requestAnimationFrame(applyParallax);
 
 
