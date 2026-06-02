@@ -97,7 +97,7 @@
 
       /* ── Details overlay ─────────────────────────────────── */
       .details .overlay {
-        padding: 45% 6% 30%;
+        padding: 39% 6% 30%;
         justify-content: space-between;
       }
 
@@ -223,7 +223,7 @@
         display: inline-block;
         border: 2px solid #e7cfba;
         border-radius: 5px;
-        padding: 5px clamp(7px, 2.5vw, 14px);
+        padding: 3px clamp(7px, 2.5vw, 14px);
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
         font-size: clamp(10px, 2.86vw, 16px);
@@ -709,25 +709,17 @@
         document.documentElement.lang = "he";
       }
 
-      const parallaxItems = [];
-
-      function cacheSections() {
-        parallaxItems.length = 0;
-        document.querySelectorAll(".section").forEach(section => {
-          parallaxItems.push({
-            overlay: section.querySelector(".overlay"),
-            top: section.getBoundingClientRect().top + window.scrollY,
-            height: section.offsetHeight
-          });
-        });
-      }
+      const sections = Array.from(document.querySelectorAll(".section")).map(s => ({
+        el: s,
+        overlay: s.querySelector(".overlay")
+      }));
 
       function applyParallax() {
-        const scrollY = window.scrollY;
         const vh = window.innerHeight;
-        parallaxItems.forEach(item => {
-          const progress = (item.top - scrollY + item.height / 2 - vh / 2) / vh;
-          item.overlay.style.transform = `translateY(${progress * -42}px)`;
+        sections.forEach(({ el, overlay }) => {
+          const rect = el.getBoundingClientRect();
+          const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+          overlay.style.transform = `translateY(${progress * -42}px)`;
         });
         ticking = false;
       }
@@ -740,9 +732,8 @@
         }
       }, { passive: true });
 
-      window.addEventListener("resize", () => { cacheSections(); applyParallax(); }, { passive: true });
-      window.addEventListener("load", () => { cacheSections(); applyParallax(); });
-      cacheSections();
+      window.addEventListener("resize", applyParallax, { passive: true });
+      window.addEventListener("load", applyParallax);
       requestAnimationFrame(applyParallax);
 
 
