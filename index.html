@@ -724,7 +724,8 @@
           const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
           if (overlay) overlay.style.transform = `translateY(${progress * -42}px)`;
           bgs.forEach(bg => {
-            bg.style.transform = `scale(1.05) translateY(${progress * 18}px)`;
+            const factor = bg.src.includes("background2") ? 40 : 18;
+            bg.style.transform = `scale(1.05) translateY(${progress * factor}px)`;
           });
         });
         ticking = false;
