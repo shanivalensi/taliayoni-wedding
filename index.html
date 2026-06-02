@@ -103,7 +103,7 @@
 
       /* ── Form overlay ────────────────────────────────────── */
       .form-section .overlay {
-        padding: 36% 2% 48%;
+        padding: 38% 2% 48%;
         justify-content: flex-start;
         gap: clamp(10px, 3.2vw, 18px);
         align-items: stretch;
@@ -713,15 +713,19 @@
 
       const sections = Array.from(document.querySelectorAll(".section")).map(s => ({
         el: s,
-        overlay: s.querySelector(".overlay")
+        overlay: s.querySelector(".overlay"),
+        bgs: s.classList.contains("form-section") ? Array.from(s.querySelectorAll(".bg")) : []
       }));
 
       function applyParallax() {
         const vh = window.innerHeight;
-        sections.forEach(({ el, overlay }) => {
+        sections.forEach(({ el, overlay, bgs }) => {
           const rect = el.getBoundingClientRect();
           const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
-          overlay.style.transform = `translateY(${progress * -42}px)`;
+          if (overlay) overlay.style.transform = `translateY(${progress * -42}px)`;
+          bgs.forEach(bg => {
+            bg.style.transform = `scale(1.05) translateY(${progress * 18}px)`;
+          });
         });
         ticking = false;
       }
