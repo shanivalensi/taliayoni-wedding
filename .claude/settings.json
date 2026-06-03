@@ -3,7 +3,8 @@
     "allow": [
       "mcp__claude_ai_Canva__get-design",
       "mcp__claude_ai_Canva__get-design-content",
-      "mcp__claude_ai_Canva__help"
+      "mcp__claude_ai_Canva__help",
+      "WebSearch"
     ]
   }
 }

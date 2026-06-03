@@ -871,39 +871,49 @@
       // ── Background music ──────────────────────────────────────────
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-btn");
+      let needsReset = false; // true after a failed play() — must call load() before next attempt
 
-      function setPlaying(val) {
-        musicBtn.style.opacity = val ? "1" : "0.7";
-        musicBtn.classList.toggle("waiting", !val);
+      function syncBtn() {
+        const on = !music.paused;
+        musicBtn.style.opacity = on ? "1" : "0.6";
+        musicBtn.classList.toggle("waiting", !on);
       }
 
       function doPlay() {
-        music.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+        // After a failed autoplay attempt, the audio element can get stuck.
+        // Calling load() resets it so the next play() works from a user gesture.
+        if (needsReset) { music.load(); needsReset = false; }
+        music.play().then(syncBtn).catch(syncBtn);
       }
 
-      // Try autoplay (desktop). If it fails, button pulses waiting for a tap.
-      setPlaying(false);
-      music.play().then(() => {
-        setPlaying(true);
-      }).catch(() => {
-        // Autoplay blocked — wait for first real tap (touchend or click)
-        function onTap() {
-          doPlay();
-          document.removeEventListener("touchend", onTap);
-          document.removeEventListener("click", onTap);
-        }
-        document.addEventListener("touchend", onTap);
-        document.addEventListener("click", onTap);
+      // Arm document-level unlock listener (fires on first click anywhere except the button)
+      function armUnlock() {
+        document.addEventListener("click", function onDocClick() {
+          if (music.paused) doPlay();
+          document.removeEventListener("click", onDocClick);
+        });
+      }
+
+      // Initial state: pulsing (waiting for interaction)
+      syncBtn();
+
+      // Try autoplay — works on desktop and some Android
+      music.play().then(syncBtn).catch(() => {
+        needsReset = true; // mark so doPlay() resets before next attempt
+        syncBtn();
+        armUnlock();
       });
 
-      // Toggle button
+      // Button: toggle play / pause
+      // stopPropagation prevents the document unlock listener from also firing on same tap
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (!music.paused) {
-          music.pause();
-          setPlaying(false);
-        } else {
+        if (music.paused) {
           doPlay();
+        } else {
+          music.pause();
+          syncBtn();
+          armUnlock(); // re-arm so tapping elsewhere restarts
         }
       });
 
