@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Talia &amp; Yoni</title>
     <style>
       @font-face {
@@ -105,7 +106,7 @@
 
       /* ── Form overlay ────────────────────────────────────── */
       .form-section .overlay {
-        padding: 65% 2% 48%;
+        padding: 50% 2% 48%;
         justify-content: flex-start;
         gap: clamp(10px, 3.2vw, 18px);
         align-items: stretch;
@@ -419,6 +420,28 @@
       }
       .radio-group.invalid label:first-of-type {
         color: #c03030;
+      }
+
+      .success-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10%;
+      }
+      .success-box {
+        background: rgba(240, 232, 220, 0.92);
+        border: 1.5px solid #f69b47;
+        border-radius: 14px;
+        padding: clamp(28px, 8vw, 48px) clamp(20px, 6vw, 36px);
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(14px, 4.2vw, 24px);
+        color: #f69b47;
+        line-height: 1.7;
+        width: 100%;
       }
 
       /* ════════════════════════════════════════════════════════
@@ -1105,7 +1128,7 @@
         btn.disabled = false;
 
         if (sheetsOk || supabaseOk) {
-          // At least one succeeded — show success
+          // At least one succeeded — replace form section with big success message
           const notAttending =
             payload.attending === "non" || payload.attending === "no";
           const successMsg = notAttending
@@ -1115,8 +1138,14 @@
             : prefix === "fr"
               ? "Hâte de vous retrouver !"
               : "כבר מצפים לראותכם !";
-          btn.style.display = "none";
-          showFeedback(prefix, "success", successMsg);
+
+          const formSection = document.getElementById(`${prefix}-submit`)
+            .closest(".form-section");
+          const successOverlay = document.createElement("div");
+          successOverlay.className = "success-overlay";
+          successOverlay.innerHTML = `<div class="success-box">${successMsg}</div>`;
+          formSection.appendChild(successOverlay);
+          formSection.querySelector(".overlay").style.visibility = "hidden";
           if (sheetsErr)
             console.warn(
               "Google Sheets failed (Supabase succeeded):",
