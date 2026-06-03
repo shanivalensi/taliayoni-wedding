@@ -905,15 +905,18 @@
             .classList.add("invalid");
           valid = false;
         }
-        if (!guests || parseInt(guests) < 1) {
-          document.getElementById(`${prefix}-guests`).classList.add("invalid");
-          valid = false;
-        }
-        if (!bus) {
-          document
-            .getElementById(`${prefix}-bus-group`)
-            .classList.add("invalid");
-          valid = false;
+        const notAttending = (attending === "non" || attending === "no");
+        if (!notAttending) {
+          if (!guests || parseInt(guests) < 1) {
+            document.getElementById(`${prefix}-guests`).classList.add("invalid");
+            valid = false;
+          }
+          if (!bus) {
+            document
+              .getElementById(`${prefix}-bus-group`)
+              .classList.add("invalid");
+            valid = false;
+          }
         }
 
         return valid;
@@ -1018,8 +1021,8 @@
           // At least one succeeded — show success
           const successMsg =
             prefix === "fr"
-              ? "Merci ! Votre réponse a bien été enregistrée. À très bientôt !"
-              : "תודה! התשובה שלכם נשמרה. להתראות בשמחה!";
+              ? "Merci ! Hâte de vous retrouver !"
+              : "תודה! כבר מצפים לראותכם !";
           btn.style.display = "none";
           showFeedback(prefix, "success", successMsg);
           if (sheetsErr)
@@ -1045,6 +1048,32 @@
           console.error("Both destinations failed:", sheetsErr, supabaseErr);
         }
       }
+
+      // ── Lock/unlock guests + bus when "not attending" ────────────
+      function setAttendingLock(prefix, attending) {
+        const guestsEl = document.getElementById(`${prefix}-guests`);
+        const busGroup = document.getElementById(`${prefix}-bus-group`);
+        const locked = (attending === "non" || attending === "no");
+
+        guestsEl.disabled = locked;
+        guestsEl.style.opacity = locked ? "0.4" : "";
+        guestsEl.style.cursor = locked ? "not-allowed" : "";
+        if (locked) guestsEl.value = "";
+
+        busGroup.querySelectorAll("input[type=radio]").forEach(r => {
+          r.disabled = locked;
+          if (locked) r.checked = false;
+        });
+        busGroup.style.opacity = locked ? "0.4" : "";
+        busGroup.style.cursor = locked ? "not-allowed" : "";
+      }
+
+      ["fr", "he"].forEach(prefix => {
+        const radioName = prefix === "fr" ? "present-fr" : "present-he";
+        document.querySelectorAll(`input[name="${radioName}"]`).forEach(r => {
+          r.addEventListener("change", () => setAttendingLock(prefix, r.value));
+        });
+      });
 
       document
         .getElementById("fr-submit")
