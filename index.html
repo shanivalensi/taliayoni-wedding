@@ -520,6 +520,7 @@
       .music-btn:hover {
         background: rgba(240, 232, 220, 1);
       }
+
     </style>
   </head>
   <body>
@@ -863,40 +864,38 @@
       // ── Background music ──────────────────────────────────────────
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-btn");
-      let userMuted = false;
 
       function updateBtn() {
         musicBtn.style.opacity = music.paused ? "0.45" : "1";
       }
 
-      function startMusic() {
-        if (userMuted) return;
-        music.play().then(updateBtn).catch(updateBtn);
-      }
-
-      // Try autoplay (works on desktop)
-      startMusic();
-      // Show as "on" immediately so user knows music is intended
+      // Show button as "on" from the start
       musicBtn.style.opacity = "1";
 
-      // Start on first interaction — covers mobile where autoplay is blocked
-      ["touchend", "click", "scroll"].forEach(evt => {
-        document.addEventListener(evt, function handler() {
-          startMusic();
-          document.removeEventListener(evt, handler);
-        }, { once: true, passive: true });
-      });
+      // Try autoplay immediately (works on desktop)
+      music.play().then(updateBtn).catch(() => {});
+
+      // Start on first interaction — no passive so browser counts it as a user gesture
+      function onFirstInteraction() {
+        if (music.paused) music.play().then(updateBtn).catch(() => {});
+        document.removeEventListener("touchstart", onFirstInteraction);
+        document.removeEventListener("touchend", onFirstInteraction);
+        document.removeEventListener("click", onFirstInteraction);
+        document.removeEventListener("scroll", onFirstInteraction);
+      }
+      document.addEventListener("touchstart", onFirstInteraction);
+      document.addEventListener("touchend", onFirstInteraction);
+      document.addEventListener("click", onFirstInteraction);
+      document.addEventListener("scroll", onFirstInteraction);
 
       // Toggle button
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (!music.paused) {
           music.pause();
-          userMuted = true;
           updateBtn();
         } else {
-          userMuted = false;
-          music.play().then(updateBtn).catch(updateBtn);
+          music.play().then(updateBtn).catch(() => {});
         }
       });
 
