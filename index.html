@@ -1019,10 +1019,10 @@
 
         if (sheetsOk || supabaseOk) {
           // At least one succeeded — show success
-          const successMsg =
-            prefix === "fr"
-              ? "Merci ! Hâte de vous retrouver !"
-              : "תודה! כבר מצפים לראותכם !";
+          const notAttending = payload.attending === "non" || payload.attending === "no";
+          const successMsg = notAttending
+            ? (prefix === "fr" ? "Merci pour votre réponse !" : "תודה על תשובתכם !")
+            : (prefix === "fr" ? "Merci ! Hâte de vous retrouver !" : "תודה! כבר מצפים לראותכם !");
           btn.style.display = "none";
           showFeedback(prefix, "success", successMsg);
           if (sheetsErr)
