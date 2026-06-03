@@ -872,7 +872,10 @@
       }
 
       function tryPlay() {
-        music.play().then(() => setPlaying(true)).catch(() => {});
+        music
+          .play()
+          .then(() => setPlaying(true))
+          .catch(() => {});
       }
 
       // Try autoplay immediately
@@ -887,7 +890,9 @@
       }
       document.addEventListener("click", onFirstInteraction);
       document.addEventListener("touchstart", onFirstInteraction);
-      document.addEventListener("scroll", onFirstInteraction, { passive: true });
+      document.addEventListener("scroll", onFirstInteraction, {
+        passive: true,
+      });
 
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -972,10 +977,12 @@
             .classList.add("invalid");
           valid = false;
         }
-        const notAttending = (attending === "non" || attending === "no");
+        const notAttending = attending === "non" || attending === "no";
         if (!notAttending) {
           if (!guests || parseInt(guests) < 1) {
-            document.getElementById(`${prefix}-guests`).classList.add("invalid");
+            document
+              .getElementById(`${prefix}-guests`)
+              .classList.add("invalid");
             valid = false;
           }
           if (!bus) {
@@ -1086,10 +1093,15 @@
 
         if (sheetsOk || supabaseOk) {
           // At least one succeeded — show success
-          const notAttending = payload.attending === "non" || payload.attending === "no";
+          const notAttending =
+            payload.attending === "non" || payload.attending === "no";
           const successMsg = notAttending
-            ? (prefix === "fr" ? "Merci pour votre réponse !" : "תודה על תשובתכם !")
-            : (prefix === "fr" ? "Merci ! Hâte de vous retrouver !" : "תודה! כבר מצפים לראותכם !");
+            ? prefix === "fr"
+              ? "Merci pour votre réponse !"
+              : "תודה על תשובתכם !"
+            : prefix === "fr"
+              ? "Hâte de vous retrouver !"
+              : "כבר מצפים לראותכם !";
           btn.style.display = "none";
           showFeedback(prefix, "success", successMsg);
           if (sheetsErr)
@@ -1120,14 +1132,14 @@
       function setAttendingLock(prefix, attending) {
         const guestsEl = document.getElementById(`${prefix}-guests`);
         const busGroup = document.getElementById(`${prefix}-bus-group`);
-        const locked = (attending === "non" || attending === "no");
+        const locked = attending === "non" || attending === "no";
 
         guestsEl.disabled = locked;
         guestsEl.style.opacity = locked ? "0.4" : "";
         guestsEl.style.cursor = locked ? "not-allowed" : "";
         if (locked) guestsEl.value = "";
 
-        busGroup.querySelectorAll("input[type=radio]").forEach(r => {
+        busGroup.querySelectorAll("input[type=radio]").forEach((r) => {
           r.disabled = locked;
           if (locked) r.checked = false;
         });
@@ -1135,9 +1147,9 @@
         busGroup.style.cursor = locked ? "not-allowed" : "";
       }
 
-      ["fr", "he"].forEach(prefix => {
+      ["fr", "he"].forEach((prefix) => {
         const radioName = prefix === "fr" ? "present-fr" : "present-he";
-        document.querySelectorAll(`input[name="${radioName}"]`).forEach(r => {
+        document.querySelectorAll(`input[name="${radioName}"]`).forEach((r) => {
           r.addEventListener("change", () => setAttendingLock(prefix, r.value));
         });
       });
