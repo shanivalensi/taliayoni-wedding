@@ -864,47 +864,45 @@
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-btn");
       let playing = false;
+      let userMuted = false; // true only if user explicitly tapped the button to mute
 
       function setPlaying(val) {
         playing = val;
-        musicBtn.textContent = playing ? "♪" : "♪";
         musicBtn.style.opacity = playing ? "1" : "0.45";
       }
 
       function tryPlay() {
-        music
-          .play()
-          .then(() => setPlaying(true))
-          .catch(() => {});
+        music.play().then(() => setPlaying(true)).catch(() => {});
       }
 
-      // Try autoplay immediately
+      // Try autoplay immediately (works on desktop, blocked on mobile until interaction)
       tryPlay();
 
-      // On first interaction, start if still blocked
+      // Button starts visually "on" — music will start on first touch
+      musicBtn.style.opacity = "1";
+
+      // On first interaction, start if not blocked by user
       function onFirstInteraction() {
-        if (!playing) tryPlay();
+        if (!playing && !userMuted) tryPlay();
         document.removeEventListener("click", onFirstInteraction);
         document.removeEventListener("touchstart", onFirstInteraction);
         document.removeEventListener("scroll", onFirstInteraction);
       }
       document.addEventListener("click", onFirstInteraction);
       document.addEventListener("touchstart", onFirstInteraction);
-      document.addEventListener("scroll", onFirstInteraction, {
-        passive: true,
-      });
+      document.addEventListener("scroll", onFirstInteraction, { passive: true });
 
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (playing) {
           music.pause();
           setPlaying(false);
+          userMuted = true;
         } else {
+          userMuted = false;
           tryPlay();
         }
       });
-
-      setPlaying(false);
 
       let ticking = false;
       window.addEventListener(
