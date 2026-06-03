@@ -520,6 +520,13 @@
       .music-btn:hover {
         background: rgba(240, 232, 220, 1);
       }
+      .music-btn.waiting {
+        animation: music-pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes music-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(143, 91, 62, 0.4); }
+        50%       { box-shadow: 0 0 0 7px rgba(143, 91, 62, 0); }
+      }
 
     </style>
   </head>
@@ -865,37 +872,38 @@
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-btn");
 
-      function updateBtn() {
-        musicBtn.style.opacity = music.paused ? "0.45" : "1";
+      function setPlaying(val) {
+        musicBtn.style.opacity = val ? "1" : "0.7";
+        musicBtn.classList.toggle("waiting", !val);
       }
 
-      // Show button as "on" from the start
-      musicBtn.style.opacity = "1";
-
-      // Try autoplay immediately (works on desktop)
-      music.play().then(updateBtn).catch(() => {});
-
-      // Start on first interaction — no passive so browser counts it as a user gesture
-      function onFirstInteraction() {
-        if (music.paused) music.play().then(updateBtn).catch(() => {});
-        document.removeEventListener("touchstart", onFirstInteraction);
-        document.removeEventListener("touchend", onFirstInteraction);
-        document.removeEventListener("click", onFirstInteraction);
-        document.removeEventListener("scroll", onFirstInteraction);
+      function doPlay() {
+        music.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
       }
-      document.addEventListener("touchstart", onFirstInteraction);
-      document.addEventListener("touchend", onFirstInteraction);
-      document.addEventListener("click", onFirstInteraction);
-      document.addEventListener("scroll", onFirstInteraction);
+
+      // Try autoplay (desktop). If it fails, button pulses waiting for a tap.
+      setPlaying(false);
+      music.play().then(() => {
+        setPlaying(true);
+      }).catch(() => {
+        // Autoplay blocked — wait for first real tap (touchend or click)
+        function onTap() {
+          doPlay();
+          document.removeEventListener("touchend", onTap);
+          document.removeEventListener("click", onTap);
+        }
+        document.addEventListener("touchend", onTap);
+        document.addEventListener("click", onTap);
+      });
 
       // Toggle button
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (!music.paused) {
           music.pause();
-          updateBtn();
+          setPlaying(false);
         } else {
-          music.play().then(updateBtn).catch(() => {});
+          doPlay();
         }
       });
 
