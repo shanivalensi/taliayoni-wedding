@@ -83,12 +83,14 @@
         overflow: hidden;
       }
 
-
-
       .details {
         z-index: 2;
         margin-bottom: -18%;
-        -webkit-mask-image: linear-gradient(to bottom, black 94%, transparent 100%);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 94%,
+          transparent 100%
+        );
         mask-image: linear-gradient(to bottom, black 94%, transparent 100%);
       }
       .form-section {
@@ -353,7 +355,7 @@
         cursor: pointer;
       }
       .radio-group input[type="radio"]:checked::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -382,6 +384,41 @@
       }
       .submit-btn:hover {
         background: rgba(246, 155, 71, 0.08);
+      }
+      .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .form-feedback {
+        align-self: center;
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(9px, 2.68vw, 15px);
+        padding: 10px 16px;
+        border-radius: 6px;
+        display: none;
+      }
+      .form-feedback.success {
+        background: rgba(143, 91, 62, 0.1);
+        border: 1px solid #8f5b3e;
+        color: #8f5b3e;
+      }
+      .form-feedback.error {
+        background: rgba(200, 50, 50, 0.08);
+        border: 1px solid #c03030;
+        color: #c03030;
+      }
+      [dir="rtl"] .form-feedback {
+        font-family: "Hadasim CLM", serif;
+      }
+
+      .field-input.invalid,
+      .field-textarea.invalid {
+        border-color: #c03030;
+      }
+      .radio-group.invalid label:first-of-type {
+        color: #c03030;
       }
 
       /* ════════════════════════════════════════════════════════
@@ -460,7 +497,6 @@
         font-weight: 400;
         letter-spacing: 0;
       }
-
     </style>
   </head>
   <body>
@@ -498,7 +534,8 @@
 
             <div class="invite-group">
               <div class="invite-text">
-                ET VOUS PRIENT DE BIEN VOULOIR ASSISTER À LA HOUPPA<br />QUI SERA CÉLÉBRÉE
+                ET VOUS PRIENT DE BIEN VOULOIR ASSISTER À LA HOUPPA<br />QUI
+                SERA CÉLÉBRÉE
               </div>
               <div class="invite-bold">AVANT LE COUCHER DU SOLEIL</div>
             </div>
@@ -526,7 +563,8 @@
             </div>
 
             <div class="memorial">
-              EN SOUVENIR DE NOS GRANDS-PARENTS,<br />MEVORAH &amp; MISHKA BERREBI,<br />PRÉSENTS DANS CHACUN DE NOS PAS
+              EN SOUVENIR DE NOS GRANDS-PARENTS,<br />MEVORAH &amp; MISHKA
+              BERREBI,<br />PRÉSENTS DANS CHACUN DE NOS PAS
             </div>
           </div>
         </div>
@@ -545,41 +583,66 @@
             <div class="name-group">
               <div class="form-field">
                 <span class="field-label">NOM</span>
-                <input class="field-input" type="text" autocomplete="family-name" />
+                <input
+                  id="fr-lastName"
+                  class="field-input"
+                  type="text"
+                  autocomplete="family-name"
+                />
               </div>
               <div class="form-field">
                 <span class="field-label">PRÉNOM</span>
-                <input class="field-input" type="text" autocomplete="given-name" />
+                <input
+                  id="fr-firstName"
+                  class="field-input"
+                  type="text"
+                  autocomplete="given-name"
+                />
               </div>
             </div>
 
             <div class="form-field">
               <span class="field-label">SEREZ-VOUS PRÉSENT(E) À LA HOUPPA</span>
-              <div class="radio-group">
-                <label><input type="radio" name="present-fr" value="oui" /> OUI</label>
-                <label><input type="radio" name="present-fr" value="non" /> NON</label>
+              <div id="fr-attending-group" class="radio-group">
+                <label
+                  ><input type="radio" name="present-fr" value="oui" />
+                  OUI</label
+                >
+                <label
+                  ><input type="radio" name="present-fr" value="non" />
+                  NON</label
+                >
               </div>
             </div>
 
-            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px);">
+            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px)">
               <span class="field-label">NOMBRE DE PERSONNES</span>
-              <input class="field-input" type="number" min="1" />
+              <input id="fr-guests" class="field-input" type="number" min="1" />
             </div>
 
-            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px);">
-              <span class="field-label">ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA ?</span>
-              <div class="radio-group">
-                <label><input type="radio" name="bus-fr" value="oui" /> OUI</label>
-                <label><input type="radio" name="bus-fr" value="non" /> NON</label>
+            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px)">
+              <span class="field-label"
+                >ÊTES-VOUS INTÉRESSÉ(S) PAR UN BUS AU DÉPART DE RAANANA ?</span
+              >
+              <div id="fr-bus-group" class="radio-group">
+                <label
+                  ><input type="radio" name="bus-fr" value="oui" /> OUI</label
+                >
+                <label
+                  ><input type="radio" name="bus-fr" value="non" /> NON</label
+                >
               </div>
             </div>
 
-            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px);">
+            <div class="form-field" style="margin-top: clamp(10px, 3vw, 18px)">
               <span class="field-label">LAISSEZ UN MESSAGE AUX MARIÉS !</span>
-              <textarea class="field-textarea"></textarea>
+              <textarea id="fr-message" class="field-textarea"></textarea>
             </div>
 
-            <button class="submit-btn">CONFIRMEZ VOTRE RÉPONSE</button>
+            <div id="fr-feedback" class="form-feedback"></div>
+            <button id="fr-submit" class="submit-btn">
+              CONFIRMEZ VOTRE RÉPONSE
+            </button>
             <img src="resources/kedar.png" class="kedar-signature" alt="" />
           </div>
         </div>
@@ -661,41 +724,61 @@
 
             <div class="form-field">
               <span class="field-label">שם</span>
-              <input class="field-input" type="text" autocomplete="family-name" />
+              <input
+                id="he-lastName"
+                class="field-input"
+                type="text"
+                autocomplete="family-name"
+              />
             </div>
 
             <div class="form-field">
               <span class="field-label">שם משפחה</span>
-              <input class="field-input" type="text" autocomplete="given-name" />
+              <input
+                id="he-firstName"
+                class="field-input"
+                type="text"
+                autocomplete="given-name"
+              />
             </div>
 
             <div class="form-field">
               <span class="field-label">האם תהיו נוכחים בחופה?</span>
-              <div class="radio-group">
-                <label><input type="radio" name="present-he" value="yes" /> כן</label>
-                <label><input type="radio" name="present-he" value="no" /> לא</label>
+              <div id="he-attending-group" class="radio-group">
+                <label
+                  ><input type="radio" name="present-he" value="yes" />
+                  כן</label
+                >
+                <label
+                  ><input type="radio" name="present-he" value="no" /> לא</label
+                >
               </div>
             </div>
 
             <div class="form-field">
               <span class="field-label">מספר האורחים</span>
-              <input class="field-input" type="number" min="1" />
+              <input id="he-guests" class="field-input" type="number" min="1" />
             </div>
 
             <div class="form-field">
               <span class="field-label">האם אתם מעוניינים בהסעה מרעננה?</span>
-              <div class="radio-group">
-                <label><input type="radio" name="bus-he" value="yes" /> כן</label>
-                <label><input type="radio" name="bus-he" value="no" /> לא</label>
+              <div id="he-bus-group" class="radio-group">
+                <label
+                  ><input type="radio" name="bus-he" value="yes" /> כן</label
+                >
+                <label
+                  ><input type="radio" name="bus-he" value="no" /> לא</label
+                >
               </div>
             </div>
 
             <div class="form-field">
               <span class="field-label">השאירו ברכה לזוג!</span>
-              <textarea class="field-textarea"></textarea>
+              <textarea id="he-message" class="field-textarea"></textarea>
             </div>
 
-            <button class="submit-btn">אשרו את תשובתכם</button>
+            <div id="he-feedback" class="form-feedback"></div>
+            <button id="he-submit" class="submit-btn">אשרו את תשובתכם</button>
             <img src="resources/kedar.png" class="kedar-signature" alt="" />
           </div>
         </div>
@@ -703,6 +786,18 @@
     </div>
 
     <script>
+      // ── Config ────────────────────────────────────────────────────
+      // Replace these placeholders after deploying the Google Apps Script
+      // and creating the Supabase table.
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbx71jJQeaazemy_u39TWU9-1SW8t2-At9EhLjhxyc-adAAhgEH_if9bNEWrFxjifyDm/exec";
+      const SUPABASE_URL = "https://lrjfrprgvehshgvalqhr.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyamZycHJndmVoc2hndmFscWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NzM5NDAsImV4cCI6MjA5NjA0OTk0MH0.jV-pThFUimOiUP2cc2w3fzcQIGYMMmYz5GEL7RstkT4";
+      const SUPABASE_TABLE = "rsvp";
+      // ─────────────────────────────────────────────────────────────
+
+      // ── Language init ─────────────────────────────────────────────
       const lang =
         new URLSearchParams(window.location.search).get("lang") || "fr";
       if (lang === "he") {
@@ -711,19 +806,27 @@
         document.documentElement.lang = "he";
       }
 
-      const sections = Array.from(document.querySelectorAll(".section")).map(s => ({
-        el: s,
-        overlay: s.querySelector(".overlay"),
-        bgs: s.classList.contains("form-section") ? Array.from(s.querySelectorAll(".bg")) : []
-      }));
+      // ── Parallax ──────────────────────────────────────────────────
+      const sections = Array.from(document.querySelectorAll(".section")).map(
+        (s) => ({
+          el: s,
+          overlay: s.querySelector(".overlay"),
+          bgs: s.classList.contains("form-section")
+            ? Array.from(s.querySelectorAll(".bg"))
+            : [],
+        }),
+      );
 
       function applyParallax() {
-        const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+        const vh = window.visualViewport
+          ? window.visualViewport.height
+          : window.innerHeight;
         sections.forEach(({ el, overlay, bgs }) => {
           const rect = el.getBoundingClientRect();
           const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
-          if (overlay) overlay.style.transform = `translateY(${progress * -42}px)`;
-          bgs.forEach(bg => {
+          if (overlay)
+            overlay.style.transform = `translateY(${progress * -42}px)`;
+          bgs.forEach((bg) => {
             const factor = bg.src.includes("background2") ? 40 : 18;
             bg.style.transform = `scale(1.05) translateY(${progress * factor}px)`;
           });
@@ -732,21 +835,223 @@
       }
 
       let ticking = false;
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(applyParallax);
-        }
-      }, { passive: true });
-
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(applyParallax);
+          }
+        },
+        { passive: true },
+      );
       window.addEventListener("resize", applyParallax, { passive: true });
       window.addEventListener("load", applyParallax);
       if (window.visualViewport) {
-        window.visualViewport.addEventListener("resize", applyParallax, { passive: true });
+        window.visualViewport.addEventListener("resize", applyParallax, {
+          passive: true,
+        });
       }
       requestAnimationFrame(applyParallax);
 
+      // ── Form submission ───────────────────────────────────────────
 
+      function getVal(id) {
+        return (document.getElementById(id) || {}).value || "";
+      }
+      function getRadio(name) {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : "";
+      }
+
+      function clearInvalid(prefix) {
+        ["lastName", "firstName", "guests"].forEach((f) => {
+          const el = document.getElementById(`${prefix}-${f}`);
+          if (el) el.classList.remove("invalid");
+        });
+        ["attending-group", "bus-group"].forEach((f) => {
+          const el = document.getElementById(`${prefix}-${f}`);
+          if (el) el.classList.remove("invalid");
+        });
+      }
+
+      function validateForm(prefix) {
+        const lang = prefix === "fr" ? "fr" : "he";
+        let valid = true;
+
+        const lastName = getVal(`${prefix}-lastName`);
+        const firstName = getVal(`${prefix}-firstName`);
+        const attending = getRadio(
+          prefix === "fr" ? "present-fr" : "present-he",
+        );
+        const guests = getVal(`${prefix}-guests`);
+        const bus = getRadio(prefix === "fr" ? "bus-fr" : "bus-he");
+
+        if (!lastName.trim()) {
+          document
+            .getElementById(`${prefix}-lastName`)
+            .classList.add("invalid");
+          valid = false;
+        }
+        if (!firstName.trim()) {
+          document
+            .getElementById(`${prefix}-firstName`)
+            .classList.add("invalid");
+          valid = false;
+        }
+        if (!attending) {
+          document
+            .getElementById(`${prefix}-attending-group`)
+            .classList.add("invalid");
+          valid = false;
+        }
+        if (!guests || parseInt(guests) < 1) {
+          document.getElementById(`${prefix}-guests`).classList.add("invalid");
+          valid = false;
+        }
+        if (!bus) {
+          document
+            .getElementById(`${prefix}-bus-group`)
+            .classList.add("invalid");
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      async function sendToGoogleSheets(payload) {
+        // no-cors: Google Apps Script doesn't send CORS headers.
+        // The request reaches the script and writes to the sheet,
+        // but the response is opaque (unreadable) — that's expected.
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(payload),
+        });
+      }
+
+      async function sendToSupabase(payload) {
+        const resp = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify({
+            lang: payload.lang,
+            last_name: payload.lastName,
+            first_name: payload.firstName,
+            attending: payload.attending,
+            guests: parseInt(payload.guests),
+            bus: payload.bus,
+            message: payload.message,
+          }),
+        });
+        if (!resp.ok) {
+          const err = await resp.text();
+          throw new Error(err);
+        }
+      }
+
+      function showFeedback(prefix, type, msg) {
+        const el = document.getElementById(`${prefix}-feedback`);
+        el.className = `form-feedback ${type}`;
+        el.textContent = msg;
+        el.style.display = "block";
+        el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      async function handleSubmit(prefix) {
+        clearInvalid(prefix);
+        if (!validateForm(prefix)) {
+          const msg =
+            prefix === "fr"
+              ? "Veuillez remplir tous les champs obligatoires."
+              : "נא למלא את כל השדות החובה.";
+          showFeedback(prefix, "error", msg);
+          return;
+        }
+
+        const payload = {
+          lang: prefix,
+          lastName: getVal(`${prefix}-lastName`).trim(),
+          firstName: getVal(`${prefix}-firstName`).trim(),
+          attending: getRadio(prefix === "fr" ? "present-fr" : "present-he"),
+          guests: getVal(`${prefix}-guests`),
+          bus: getRadio(prefix === "fr" ? "bus-fr" : "bus-he"),
+          message: getVal(`${prefix}-message`).trim(),
+        };
+
+        const btn = document.getElementById(`${prefix}-submit`);
+        btn.disabled = true;
+        const loadingMsg = prefix === "fr" ? "Envoi en cours..." : "שולח...";
+        btn.textContent = loadingMsg;
+
+        let sheetsOk = false;
+        let supabaseOk = false;
+        let sheetsErr = null;
+        let supabaseErr = null;
+
+        // Send to both in parallel — neither blocks the other
+        await Promise.allSettled([
+          sendToGoogleSheets(payload)
+            .then(() => {
+              sheetsOk = true;
+            })
+            .catch((e) => {
+              sheetsErr = e;
+            }),
+          sendToSupabase(payload)
+            .then(() => {
+              supabaseOk = true;
+            })
+            .catch((e) => {
+              supabaseErr = e;
+            }),
+        ]);
+
+        btn.disabled = false;
+
+        if (sheetsOk || supabaseOk) {
+          // At least one succeeded — show success
+          const successMsg =
+            prefix === "fr"
+              ? "Merci ! Votre réponse a bien été enregistrée. À très bientôt !"
+              : "תודה! התשובה שלכם נשמרה. להתראות בשמחה!";
+          btn.style.display = "none";
+          showFeedback(prefix, "success", successMsg);
+          if (sheetsErr)
+            console.warn(
+              "Google Sheets failed (Supabase succeeded):",
+              sheetsErr,
+            );
+          if (supabaseErr)
+            console.warn(
+              "Supabase failed (Google Sheets succeeded):",
+              supabaseErr,
+            );
+        } else {
+          // Both failed
+          const errorMsg =
+            prefix === "fr"
+              ? "Une erreur s'est produite. Veuillez réessayer."
+              : "אירעה שגיאה. אנא נסו שנית.";
+          const origLabel =
+            prefix === "fr" ? "CONFIRMEZ VOTRE RÉPONSE" : "אשרו את תשובתכם";
+          btn.textContent = origLabel;
+          showFeedback(prefix, "error", errorMsg);
+          console.error("Both destinations failed:", sheetsErr, supabaseErr);
+        }
+      }
+
+      document
+        .getElementById("fr-submit")
+        .addEventListener("click", () => handleSubmit("fr"));
+      document
+        .getElementById("he-submit")
+        .addEventListener("click", () => handleSubmit("he"));
     </script>
   </body>
 </html>

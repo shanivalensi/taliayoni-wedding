@@ -1,30 +1,49 @@
-i want you to copy the design of a canva page and make it a website, a wedding resa.
-the canva contains 2 pages: details, and "forms".
+# Talia & Yoni Wedding Website
 
-the website you build is only one page (landing page) you need to have the exact same colors and fonts and placements as the canva.
+A single-page bilingual wedding invitation website for Talia & Yoni's wedding on Tuesday 25 August 2026.
 
-the page is in french or hebrew, it is decided by a query param ("fr/he")
+## Language
 
-# page style
+Controlled by query param `?lang=fr` (default) or `?lang=he`. The full page renders in the selected language — French or Hebrew.
 
-all the font color is #8f5b3e
+## Structure
 
-basic french is - montserrat-regular
-the only montserrat-bold are:
+Two visual sections, each with a full-width watercolor background image:
 
-1. "AVANT LE COUCHER DU SOLEIL"
+1. **Details section** (`background1.png`) — invitation text: families, couple names, date, venue, WAZE button, reception note, memorial dedication.
+2. **Form section** (`background-blank.png` + `background2.png` stacked) — RSVP form: name, attendance, guest count, bus interest, message, submit button, Kedar logo.
 
-2. "LE MARDI 25 AOÛT 2026
-   12 ELOUL 5786
-   À 17 HEURES 15 PRÉCISES"
+Background 1 overlaps the form section via a negative `margin-bottom` with a mask gradient fade at the bottom edge.
 
-in any language the "Talia & Yoni"
-is "slight"
+## Colors & Fonts
 
-all the hebrew in the french page is Hadasim-clm-bold
+- All text: `#8f5b3e`
+- Submit button: `#f69b47` (border + text, transparent bg)
+- WAZE button: `#e7cfba` background, white text
+- Body background: `#f0e8dc`
 
-all the basic hebrew (that is not in the french)
+### French page fonts
+- Base: Montserrat Regular
+- Bold (only): "AVANT LE COUCHER DU SOLEIL" and the date block
+- Couple name "Talia & Yoni": Slight
+- Hebrew text within French page (מרים, אברהם יוסף): Hadasim CLM Bold
 
-is hadasim-clm-regular
+### Hebrew page fonts
+- Base: Hadasim CLM Regular
+- Bold: same elements as French equivalents
+- Couple name: Slight
 
-ask questions when your not sure
+## Responsive
+
+All font sizes and margins use `clamp(min, vw, max)` to scale proportionally with viewport width (designed for 560px max-width). All `padding` percentages on overlays are relative to container width so they scale identically on phone and desktop.
+
+## Parallax
+
+- Content overlays drift at factor `−42` (text moves slower than background).
+- Form section background images have additional parallax: `background-blank.png` at factor `18`, `background2.png` at factor `40`.
+- Uses live `getBoundingClientRect()` per frame — no stale cache.
+- Uses `visualViewport.height` for accurate height on iOS Safari.
+
+## WAZE link
+
+`https://waze.com/ul?ll=31.736648,35.319092&navigate=yes` — opens navigation directly.
