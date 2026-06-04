@@ -453,24 +453,28 @@
       }
       [dir="rtl"] .families {
         direction: rtl;
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         text-align: right;
+        font-size: clamp(8px, 2.32vw, 13px);
       }
       [dir="rtl"] .announcement {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         letter-spacing: 0;
+        font-size: clamp(10px, 2.86vw, 16px);
       }
       [dir="rtl"] .invite-text {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
+        font-size: clamp(9px, 2.86vw, 16px);
       }
       [dir="rtl"] .invite-bold {
         font-family: "Hadasim CLM", serif;
         font-weight: 700;
         letter-spacing: 0;
+        font-size: clamp(9px, 2.86vw, 16px);
       }
       [dir="rtl"] .date-block {
         font-family: "Hadasim CLM", serif;
@@ -478,15 +482,17 @@
         letter-spacing: 0;
       }
       [dir="rtl"] .reception {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         letter-spacing: 0;
+        font-size: clamp(10px, 2.86vw, 16px);
       }
       [dir="rtl"] .memorial {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         font-style: normal;
         letter-spacing: 0;
+        font-size: clamp(10px, 2.68vw, 15px);
       }
 
       [dir="rtl"] .form-section .overlay {
@@ -495,30 +501,39 @@
         align-items: stretch;
       }
       [dir="rtl"] .form-title {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
+        font-size: clamp(16px, 5vw, 28px);
       }
       [dir="rtl"] .field-label {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         letter-spacing: 0;
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .field-input,
       [dir="rtl"] .field-textarea {
         direction: rtl;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .radio-group {
         flex-direction: column;
         align-items: flex-end;
+        padding-left: 0;
+        padding-right: clamp(4px, 1.2vw, 7px);
       }
       [dir="rtl"] .radio-group label {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         letter-spacing: 0;
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .submit-btn {
-        font-family: "Hadasim CLM", serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         letter-spacing: 0;
+        font-size: clamp(11px, 3.21vw, 18px);
+        padding: 14px clamp(40px, 12vw, 70px);
       }
 
       .music-btn {
@@ -719,11 +734,11 @@
             <div class="quote">"וְהַבּוֹטֵחַ בַּיהוָה חֶסֶד יְסוֹבְבֶנּוּ"</div>
 
             <div class="families">
+              <div>אברהם &amp; מישל קריאף<br /><br /><br />דב &amp; שרה ברבי</div>
               <div>
                 ג'ררד &amp; בריז'יט בנישו<br />סילבן &amp; ז'וסלין ולנסי<br /><br />סנדרה
                 ולנסי<br />פרנק ולנסי
               </div>
-              <div>אברהם &amp; מישל קריאף<br /><br />דב &amp; שרה ברבי</div>
             </div>
 
             <div class="announcement">
@@ -763,7 +778,7 @@
             <div class="reception">לאחר הטקס תתקיים קבלת פנים</div>
 
             <div class="memorial">
-              לזכר סבינו וסבתותינו, מבורך ומישקה ברבי,<br />הנוכחים בכל צעד
+              לזכר סבינו וסבתותינו,<br />מבורך ומישקה ברבי,<br />הנוכחים בכל צעד
               בחיינו
             </div>
           </div>
@@ -781,22 +796,22 @@
             </div>
 
             <div class="form-field">
-              <span class="field-label">שם</span>
-              <input
-                id="he-lastName"
-                class="field-input"
-                type="text"
-                autocomplete="family-name"
-              />
-            </div>
-
-            <div class="form-field">
               <span class="field-label">שם משפחה</span>
               <input
                 id="he-firstName"
                 class="field-input"
                 type="text"
                 autocomplete="given-name"
+              />
+            </div>
+
+            <div class="form-field">
+              <span class="field-label">שם</span>
+              <input
+                id="he-lastName"
+                class="field-input"
+                type="text"
+                autocomplete="family-name"
               />
             </div>
 
