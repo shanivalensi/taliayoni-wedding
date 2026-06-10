@@ -586,11 +586,11 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        padding-bottom: 12%;
+        padding-bottom: 15%;
       }
       #splash-btn {
         background: #e7cfba;
-        color: #ffffff;
+        color: #773500;
         border: none;
         border-radius: 6px;
         font-family: "Montserrat", sans-serif;
@@ -956,6 +956,8 @@
       // ── Splash screen ─────────────────────────────────────────────
       const splash = document.getElementById("splash");
       const splashBtn = document.getElementById("splash-btn");
+
+      splashBtn.textContent = lang === "he" ? "לפתיחת ההזמנה" : "Ouvrir l'invitation";
 
       splashBtn.addEventListener("click", () => {
         splash.style.display = "none";
