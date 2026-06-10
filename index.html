@@ -570,9 +570,50 @@
         50%       { box-shadow: 0 0 0 7px rgba(143, 91, 62, 0); }
       }
 
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #f0e8dc;
+        display: flex;
+        justify-content: center;
+      }
+      #splash-inner {
+        width: 100%;
+        max-width: 560px;
+        position: relative;
+        background: url('resources/background-first.png') center center / cover no-repeat;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 12%;
+      }
+      #splash-btn {
+        background: #e7cfba;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: clamp(12px, 3.5vw, 18px);
+        padding: 12px clamp(24px, 7vw, 42px);
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition: background 0.2s;
+      }
+      #splash-btn:hover {
+        background: #d4b89e;
+      }
+
     </style>
   </head>
   <body>
+    <div id="splash">
+      <div id="splash-inner">
+        <button id="splash-btn">Ouvrir l'invitation</button>
+      </div>
+    </div>
+
     <audio id="bg-music" src="resources/music.mp3" loop preload="auto"></audio>
     <button class="music-btn" id="music-btn" title="Musique">♪</button>
 
@@ -721,7 +762,7 @@
             </button>
             <img src="resources/kedar.png" class="kedar-signature" alt="" />
           </div>
-          <div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(7px,2vw,11px);color:#8f5b3e;z-index:3;">BY EVA<br/>053.708.1322</div>
+          <div style="position:absolute;bottom:88px;left:0;right:0;text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(7px,2vw,11px);color:#8f5b3e;z-index:3;">BY EVA<br/>053.708.1322</div>
         </div>
       </div>
     </div>
@@ -858,7 +899,7 @@
             <button id="he-submit" class="submit-btn">אשרו את תשובתכם</button>
             <img src="resources/kedar.png" class="kedar-signature" alt="" />
           </div>
-          <div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(7px,2vw,11px);color:#8f5b3e;z-index:3;">BY EVA<br/>053.708.1322</div>
+          <div style="position:absolute;bottom:88px;left:0;right:0;text-align:center;font-family:'Montserrat',sans-serif;font-size:clamp(7px,2vw,11px);color:#8f5b3e;z-index:3;">BY EVA<br/>053.708.1322</div>
         </div>
       </div>
     </div>
@@ -912,10 +953,18 @@
         ticking = false;
       }
 
+      // ── Splash screen ─────────────────────────────────────────────
+      const splash = document.getElementById("splash");
+      const splashBtn = document.getElementById("splash-btn");
+
+      splashBtn.addEventListener("click", () => {
+        splash.style.display = "none";
+        doPlay();
+      });
+
       // ── Background music ──────────────────────────────────────────
       const music = document.getElementById("bg-music");
       const musicBtn = document.getElementById("music-btn");
-      let needsReset = false; // true after a failed play() — must call load() before next attempt
 
       function syncBtn() {
         const on = !music.paused;
@@ -924,32 +973,13 @@
       }
 
       function doPlay() {
-        // After a failed autoplay attempt, the audio element can get stuck.
-        // Calling load() resets it so the next play() works from a user gesture.
-        if (needsReset) { music.load(); needsReset = false; }
         music.play().then(syncBtn).catch(syncBtn);
       }
 
-      // Arm document-level unlock listener (fires on first click anywhere except the button)
-      function armUnlock() {
-        document.addEventListener("click", function onDocClick() {
-          if (music.paused) doPlay();
-          document.removeEventListener("click", onDocClick);
-        });
-      }
-
-      // Initial state: pulsing (waiting for interaction)
+      // Initial state: pulsing
       syncBtn();
 
-      // Try autoplay — works on desktop and some Android
-      music.play().then(syncBtn).catch(() => {
-        needsReset = true; // mark so doPlay() resets before next attempt
-        syncBtn();
-        armUnlock();
-      });
-
       // Button: toggle play / pause
-      // stopPropagation prevents the document unlock listener from also firing on same tap
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (music.paused) {
@@ -957,7 +987,6 @@
         } else {
           music.pause();
           syncBtn();
-          armUnlock(); // re-arm so tapping elsewhere restarts
         }
       });
 
@@ -1156,7 +1185,7 @@
               : "תודה על תשובתכם !"
             : prefix === "fr"
               ? "Hâte de vous retrouver !"
-              : "כבר מצפים לראותכם !";
+              : "מצפים לראותכם !";
 
           const formSection = document.getElementById(`${prefix}-submit`)
             .closest(".form-section");
