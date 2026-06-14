@@ -12,9 +12,9 @@
     />
     <meta
       property="og:image"
-      content="YOUR_SITE_URL/resources/background-first.png"
+      content="taliayoni-wedding.com/resources/background-first.png"
     />
-    <meta property="og:url" content="YOUR_SITE_URL" />
+    <meta property="og:url" content="taliayoni-wedding.com" />
     <meta property="og:type" content="website" />
     <style>
       @font-face {
@@ -615,7 +615,7 @@
         color: #773500;
         border: none;
         border-radius: 6px;
-        font-family: "Hadasim CLM", sans-serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 400;
         font-size: clamp(11px, 3.4vw, 18px);
         padding: 10px clamp(16px, 5vw, 30px);
@@ -905,7 +905,8 @@
                   כן</label
                 >
                 <label
-                  ><input type="radio" name="present-he" value="non" /> לא</label
+                  ><input type="radio" name="present-he" value="non" />
+                  לא</label
                 >
               </div>
             </div>
@@ -1010,6 +1011,7 @@
 
       splashBtn.textContent =
         lang === "he" ? "לפתיחת ההזמנה" : "Ouvrir l'invitation";
+      if (lang === "he") splashBtn.style.fontFamily = '"Hadasim CLM", serif';
 
       splashBtn.addEventListener("click", () => {
         splash.style.display = "none";
@@ -1232,8 +1234,7 @@
 
         if (sheetsOk || supabaseOk) {
           // At least one succeeded — replace form section with big success message
-          const notAttending =
-            payload.attending === "non";
+          const notAttending = payload.attending === "non";
           const successMsg = notAttending
             ? prefix === "fr"
               ? "Merci pour votre réponse !"
