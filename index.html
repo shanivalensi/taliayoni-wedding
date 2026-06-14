@@ -6,8 +6,14 @@
     <meta name="format-detection" content="telephone=no" />
     <title>Talia &amp; Yoni</title>
     <meta property="og:title" content="Talia &amp; Yoni - 25 Août 2026" />
-    <meta property="og:description" content="Rejoignez-nous pour célébrer notre mariage !" />
-    <meta property="og:image" content="YOUR_SITE_URL/resources/background-first.png" />
+    <meta
+      property="og:description"
+      content="Rejoignez-nous pour célébrer notre mariage !"
+    />
+    <meta
+      property="og:image"
+      content="YOUR_SITE_URL/resources/background-first.png"
+    />
     <meta property="og:url" content="YOUR_SITE_URL" />
     <meta property="og:type" content="website" />
     <style>
@@ -461,43 +467,44 @@
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         text-align: right;
-        font-size: clamp(9px, 2.86vw, 16px);
+        font-size: clamp(10px, 3.21vw, 18px);
       }
       [dir="rtl"] .announcement {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(10px, 2.86vw, 16px);
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .invite-text {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(9px, 2.86vw, 16px);
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .invite-bold {
         font-family: "Hadasim CLM", serif;
         font-weight: 700;
         letter-spacing: 0;
-        font-size: clamp(9px, 2.86vw, 16px);
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .date-block {
         font-family: "Hadasim CLM", serif;
         font-weight: 700;
         letter-spacing: 0;
+        font-size: clamp(10px, 3vw, 17px);
       }
       [dir="rtl"] .reception {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(10px, 2.86vw, 16px);
+        font-size: clamp(11px, 3.21vw, 18px);
       }
       [dir="rtl"] .memorial {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         font-style: normal;
         letter-spacing: 0;
-        font-size: clamp(10px, 2.68vw, 15px);
+        font-size: clamp(11px, 3vw, 17px);
       }
 
       [dir="rtl"] .form-section .overlay {
@@ -508,19 +515,19 @@
       [dir="rtl"] .form-title {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
-        font-size: clamp(16px, 5vw, 28px);
+        font-size: clamp(18px, 5.5vw, 31px);
       }
       [dir="rtl"] .field-label {
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(11px, 3.21vw, 18px);
+        font-size: clamp(12px, 3.57vw, 20px);
       }
       [dir="rtl"] .field-input,
       [dir="rtl"] .field-textarea {
         direction: rtl;
         font-family: "Hadasim CLM", serif;
-        font-size: clamp(11px, 3.21vw, 18px);
+        font-size: clamp(12px, 3.57vw, 20px);
       }
       [dir="rtl"] .radio-group {
         flex-direction: column;
@@ -532,7 +539,7 @@
       [dir="rtl"] .radio-group label {
         font-family: "Hadasim CLM", serif;
         letter-spacing: 0;
-        font-size: clamp(11px, 3.21vw, 18px);
+        font-size: clamp(12px, 3.57vw, 20px);
         flex-direction: row;
         justify-content: flex-start;
         width: 100%;
@@ -541,8 +548,12 @@
         font-family: "Hadasim CLM", serif;
         font-weight: 400;
         letter-spacing: 0;
-        font-size: clamp(11px, 3.21vw, 18px);
+        font-size: clamp(12px, 3.57vw, 20px);
         padding: 14px clamp(40px, 12vw, 70px);
+      }
+
+      [dir="rtl"] .venue-he {
+        font-family: "Hadasim CLM", serif;
       }
 
       .music-btn {
@@ -604,7 +615,7 @@
         color: #773500;
         border: none;
         border-radius: 6px;
-        font-family: "Montserrat", sans-serif;
+        font-family: "Hadasim CLM", sans-serif;
         font-weight: 400;
         font-size: clamp(11px, 3.4vw, 18px);
         padding: 10px clamp(16px, 5vw, 30px);
@@ -890,11 +901,11 @@
               <span class="field-label">האם תהיו נוכחים בחופה?</span>
               <div id="he-attending-group" class="radio-group">
                 <label
-                  ><input type="radio" name="present-he" value="yes" />
+                  ><input type="radio" name="present-he" value="oui" />
                   כן</label
                 >
                 <label
-                  ><input type="radio" name="present-he" value="no" /> לא</label
+                  ><input type="radio" name="present-he" value="non" /> לא</label
                 >
               </div>
             </div>
@@ -908,10 +919,10 @@
               <span class="field-label">האם אתם מעוניינים בהסעה מרעננה?</span>
               <div id="he-bus-group" class="radio-group">
                 <label
-                  ><input type="radio" name="bus-he" value="yes" /> כן</label
+                  ><input type="radio" name="bus-he" value="oui" /> כן</label
                 >
                 <label
-                  ><input type="radio" name="bus-he" value="no" /> לא</label
+                  ><input type="radio" name="bus-he" value="non" /> לא</label
                 >
               </div>
             </div>
@@ -1105,7 +1116,7 @@
             .classList.add("invalid");
           valid = false;
         }
-        const notAttending = attending === "non" || attending === "no";
+        const notAttending = attending === "non";
         if (!notAttending) {
           if (!guests || parseInt(guests) < 1) {
             document
@@ -1222,7 +1233,7 @@
         if (sheetsOk || supabaseOk) {
           // At least one succeeded — replace form section with big success message
           const notAttending =
-            payload.attending === "non" || payload.attending === "no";
+            payload.attending === "non";
           const successMsg = notAttending
             ? prefix === "fr"
               ? "Merci pour votre réponse !"
@@ -1267,7 +1278,7 @@
       function setAttendingLock(prefix, attending) {
         const guestsEl = document.getElementById(`${prefix}-guests`);
         const busGroup = document.getElementById(`${prefix}-bus-group`);
-        const locked = attending === "non" || attending === "no";
+        const locked = attending === "non";
 
         guestsEl.disabled = locked;
         guestsEl.style.opacity = locked ? "0.4" : "";
